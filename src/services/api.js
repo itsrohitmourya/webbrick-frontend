@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // ✅ Updated baseURL to deployed backend
 const API = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL
+  baseURL: "https://webbrick-backend.onrender.com/api"
 });
 
 // ✅ Automatically attach token to headers
