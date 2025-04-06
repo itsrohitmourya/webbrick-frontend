@@ -132,7 +132,7 @@ const Contact = () => {
                   <Mail size={26} className="text-blue-400" />
                   <h3 className="text-lg font-semibold">Email</h3>
                 </div>
-                <p className="text-gray-300">support@webbrick.com</p>
+                <p className="text-gray-300">rohitmourya632@gmail.com</p>
               </div>
             </div>
 
@@ -142,7 +142,7 @@ const Contact = () => {
                   <Phone size={26} className="text-green-400" />
                   <h3 className="text-lg font-semibold">Phone</h3>
                 </div>
-                <p className="text-gray-300">+1 (123) 456-7890</p>
+                <p className="text-gray-300">not available</p>
               </div>
             </div>
 
@@ -152,7 +152,7 @@ const Contact = () => {
                   <MapPin size={28} className="text-yellow-400" />
                   <h3 className="text-lg font-semibold">Address</h3>
                 </div>
-                <p className="text-gray-300">123 WebBrick Lane, Tech City, USA</p>
+                <p className="text-gray-300">WebBrick Mumbai.</p>
               </div>
             </div>
           </div>

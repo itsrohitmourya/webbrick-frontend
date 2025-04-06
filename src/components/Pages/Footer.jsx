@@ -41,8 +41,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4 text-blue-400">Contact Us</h3>
             <p className="text-gray-400">Have questions? Reach out to us:</p>
-            <p className="mt-2 text-teal-400">support@webbrick.com</p>
-            <p className="text-gray-400">+91 98765 43210</p>
+            <p className="mt-2 text-teal-400">rohitmourya632@gmail.com</p>
+            <Link to="/contact" className="text-blue-400 hover:text-blue-500 transition mt-2 inline-block">
+              Get in Touch
+            </Link>
           </div>
 
           {/* Social Media Icons */}

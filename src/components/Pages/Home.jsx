@@ -30,7 +30,7 @@ const Home = () => {
 
       {/* ✅ Hero Section with Text Animation */}
       <section className="relative h-screen flex flex-col items-center justify-center text-center px-6 md:px-16 bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg">
-        <div className={`text-2xl my-4 font-bold text-blue-400 hover:text-blue-500 flex flex-wrap justify-center items-center gap-2 transition ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className={`text-2xl my-4 font-bold text-blue-400 hover:text-blue-500 flex flex-col flex-wrap justify-center items-center gap-2 transition ${isVisible ? "opacity-100" : "opacity-0"}`}>
           <img
             src="/icon2.png"
             alt="logo"
