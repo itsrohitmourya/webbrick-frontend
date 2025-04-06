@@ -173,7 +173,7 @@ const ProjectCards = () => {
                               <Square size={24} />
                             )}
                           </button>
-                          <span className="text-xs text-gray-300 sm:hidden">
+                          <span className="text-lg text-gray-300 sm:hidden">
                             {project.complete
                               ? "Unmark as Complete"
                               : "Mark as Complete"}

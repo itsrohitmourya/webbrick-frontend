@@ -28,8 +28,8 @@ function Editor() {
 
         {/* ✅ Small Screen Error Popup */}
         {isSmallScreen && (
-          <div className="fixed top-0 left-0 w-full border-2 border-amber-300 h-full bg-black bg-opacity-70 z-50 flex justify-center items-center">
-            <div className="bg-red-600 text-white w-[90%] p-6 rounded-lg shadow-lg text-center">
+          <div className="fixed top-0 left-0 w-full h-full gradient-animation z-50 flex justify-center items-center">
+            <div className="bg-zinc-900 text-white w-[90%] p-6 rounded-lg shadow-lg text-center">
               <h2 className="text-2xl font-bold">Screen Too Small</h2>
               <p className="mt-2">Please use a larger screen (min width: 800px) for the best experience.</p>
             </div>
