@@ -66,5 +66,7 @@ const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
+// console.log("VITE_BASE_URL:", import.meta.env.VITE_BASE_URL);
+
 
 export default App;
