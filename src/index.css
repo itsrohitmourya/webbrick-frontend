@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+
+body{
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+*{
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+#scrollNone::-webkit-scrollbar{
+    display: none;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+
+
+.create-button {
+    padding: 8px 16px;
+    background-color: #3b82f6; /* Tailwind's bg-blue-500 */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Tailwind's rounded-md */
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+  
+  .create-btn:hover {
+    background-color: #f87171; /* Tailwind's hover:bg-red-400 */
+  }
+  
+  .create-btn:active {
+    transform: scale(0.75); /* Tailwind's active:scale-75 */
+  }
+  /* Multi-gradient background animation */
+.gradient-animation {
+  background: linear-gradient(135deg, #1e3a8a, #9333ea, #14b8a6, #0ea5e9, #f43f5e);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+}
+
+/* Keyframes for smooth gradient transitions */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 🔥 Single In-Out Animation */
+@keyframes toastInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);    /* Start slightly lower and smaller */
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0) scale(1);          /* Fully visible */
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0) scale(1);          /* Stay visible */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);    /* Fade out and move up */
+  }
+}
+
+/* ✅ Apply the animation */
+#formToast {
+  animation: toastInOut 5s ease-in-out forwards;
+}

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag & Drop with Context Menu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      min-height: 600px;
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .draggable {
+      min-height: 80px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #e0e0e0;
+      cursor: grab;
+      transition: transform 0.2s ease;
+    }
+
+    .dragging {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+
+    .editing {
+      outline: 2px solid #007BFF;
+      /* Blue outline during edit mode */
+    }
+
+    .context-menu {
+      position: absolute;
+      background: #333;
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      width: 260px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .context-menu label {
+      margin-left: 5px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .context-menu input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      color: white;
+      background: rgba(132, 132, 132, 0.631);
+      outline: none;
+      border: none;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .context-menu input:focus {
+      box-shadow: 0 0 0 2px #3B82F6;
+    }
+
+    .context-menu button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: left;
+    }
+
+    .context-menu button:hover {
+      background: #555;
+    }
+
+    .context-menu button.remove {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="container">
+    <div class="draggable" draggable="true">Element 1</div>
+    <div class="draggable" draggable="true">Element 2</div>
+    <div class="draggable" draggable="true">Element 3</div>
+    <div class="draggable" draggable="true"><a href="/about">About Us</a></div>
+    <div class="draggable" draggable="true"><img src="https://via.placeholder.com/150" alt="Placeholder"></div>
+    <div class="draggable" draggable="true"><iframe width="560" height="315"
+        src="https://www.youtube.com/embed/qR9CRLjG-xk" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+
+    let draggedElement = null;
+    let selectedElement = null;
+    let currentMenu = null;
+
+    // ================================
+    // 🔥 Drag & Drop Logic
+    // ================================
+
+    container.addEventListener("dragstart", (e) => {
+      if (e.target.classList.contains("draggable")) {
+        draggedElement = e.target;
+        draggedElement.classList.add("dragging");
+      }
+    });
+
+    container.addEventListener("dragend", () => {
+      if (draggedElement) {
+        draggedElement.classList.remove("dragging");
+        draggedElement = null;
+      }
+    });
+
+    container.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(container, e.clientY);
+
+      const indicators = document.querySelectorAll(".drop-indicator");
+      indicators.forEach((indicator) => indicator.remove());
+
+      const indicator = document.createElement("div");
+      indicator.classList.add("drop-indicator");
+
+      if (afterElement == null) {
+        container.appendChild(indicator);
+      } else {
+        container.insertBefore(indicator, afterElement);
+      }
+    });
+
+    container.addEventListener("drop", (e) => {
+      e.preventDefault();
+
+      const afterElement = getDragAfterElement(container, e.clientY);
+
+      if (afterElement == null) {
+        container.appendChild(draggedElement);
+      } else {
+        container.insertBefore(draggedElement, afterElement);
+      }
+
+      const indicators = document.querySelectorAll(".drop-indicator");
+      indicators.forEach((indicator) => indicator.remove());
+    });
+
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
+
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+
+        if (offset < 0 && offset > closest.offset) {
+          return { offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    // ================================
+    // 🔥 Context Menu Logic with Outside Click Detection
+    // ================================
+
+    function createContextMenu(x, y) {
+      closeContextMenu();
+
+      currentMenu = document.createElement("div");
+      currentMenu.classList.add("context-menu");
+
+      // ✅ Edit Button
+      const editButton = document.createElement("button");
+      editButton.textContent = "Edit Text";
+      editButton.addEventListener("click", () => {
+        if (selectedElement) {
+          selectedElement.setAttribute("contenteditable", "true");
+          selectedElement.classList.add("editing");
+          selectedElement.focus();
+        }
+      });
+
+      // ✅ Remove Button
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+      removeButton.classList.add("remove");
+      removeButton.addEventListener("click", () => {
+        if (selectedElement) {
+          selectedElement.remove();   // Removes the element from DOM
+          closeContextMenu();
+        }
+      });
+
+      // ✅ URL Input if applicable
+      let urlInput = null;
+
+      if (selectedElement.tagName === "A" || selectedElement.tagName === "IMG" || selectedElement.tagName === "VIDEO") {
+        const label = document.createElement("label");
+        label.textContent = selectedElement.tagName === "A" ? "Link URL" :
+          selectedElement.tagName === "IMG" ? "Image URL" : "Video URL";
+
+        urlInput = document.createElement("input");
+        urlInput.value = selectedElement.tagName === "A" ? selectedElement.getAttribute("href") :
+          selectedElement.getAttribute("src");
+
+        currentMenu.appendChild(label);
+        currentMenu.appendChild(urlInput);
+      }
+
+      // ✅ Save Button
+      const saveButton = document.createElement("button");
+      saveButton.textContent = "Save";
+      saveButton.addEventListener("click", () => {
+        if (selectedElement) {
+          selectedElement.removeAttribute("contenteditable");
+          selectedElement.classList.remove("editing");
+
+          if (urlInput) {
+            const newValue = urlInput.value.trim();
+            if (selectedElement.tagName === "A") {
+              selectedElement.setAttribute("href", newValue);
+            } else {
+              selectedElement.setAttribute("src", newValue);
+            }
+          }
+        }
+        closeContextMenu();
+      });
+
+      currentMenu.append(editButton, removeButton, saveButton);
+      currentMenu.style.top = `${y}px`;
+      currentMenu.style.left = `${x}px`;
+      document.body.appendChild(currentMenu);
+
+      // ✅ Outside click closes the menu
+      document.addEventListener("click", handleOutsideClick);
+    }
+
+    function closeContextMenu() {
+      if (currentMenu) currentMenu.remove();
+      document.removeEventListener("click", handleOutsideClick);
+    }
+
+    function handleOutsideClick(e) {
+      if (!currentMenu.contains(e.target)) {
+        closeContextMenu();
+      }
+    }
+
+    container.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      selectedElement = e.target.closest(".draggable, a, img, video");
+      createContextMenu(e.clientX, e.clientY);
+    });
+  </script>
+
+</body>
+
+</html>
