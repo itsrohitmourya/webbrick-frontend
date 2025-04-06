@@ -72,7 +72,7 @@ function CodePreview() {
                 </SyntaxHighlighter>
             </div>
             <button
-                className="text-white absolute bottom-[8%] bg-red-600 px-6 py-2 rounded-lg active:bg-red-800 active:scale-90 transform"
+                className="text-white absolute bottom-[8%] bg-red-600 px-6 py-2 rounded-lg opacity-30 hover:opacity-100 transition-all ease-in duration-100 active:bg-red-800 active:scale-90 transform"
                 onClick={closeCodePreview}
             >
                 Close Code Preview
