@@ -92,9 +92,9 @@ const About = () => {
       </section>
 
       {/* ✅ CTA Section */}
-      <section className="py-24 text-center bg-gradient-to-r from-blue-900 to-purple-900 shadow-lg">
+      <section className="py-24 px-4 text-center bg-gradient-to-r from-blue-900 to-purple-900 shadow-lg">
         <h2 className="text-5xl font-bold text-white mb-6">Get Started with WebBrick</h2>
-        <p className="text-xl px-1 text-gray-300 max-w-2xl mx-auto">
+        <p className="text-xl text-pretty text-gray-300 max-w-2xl mx-auto">
           Start building and publishing your website today with WebBrick's no-code editor.
         </p>
         
