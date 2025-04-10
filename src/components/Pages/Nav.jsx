@@ -20,7 +20,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className="bg-zinc-900 h-18 text-white shadow-lg w-[100vw] z-50 sticky top-0 flex justify-center items-center">
+    <nav className="bg-zinc-900 h-18 text-white shadow-lg w-[100vw] z-[1000] sticky top-0 flex justify-center items-center">
       <div className="px-4 lg:px-12 flex justify-between items-center h-16 w-full lg:w-[70%]">
 
         {/* 🔥 Logo & Navigation Links */}
