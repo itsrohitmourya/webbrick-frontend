@@ -95,7 +95,7 @@ function Dashboard() {
       {/* Project Creation Popup */}
       {projectCreatePopUP && (
         <div className="fixed inset-0 flex items-center justify-center bg-[rgba(5,2,2,0.85)] z-[1000]">
-          <div className="bg-zinc-900 p-6 rounded-lg shadow-lg w-96 max-w-full">
+          <div className="bg-zinc-900 p-6 m-6 rounded-lg shadow-lg w-96 max-w-full">
             <h2 className="text-xl font-semibold text-white mb-4">Create Project</h2>
             <input
               type="text"
