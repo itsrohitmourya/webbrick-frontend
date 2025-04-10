@@ -29,7 +29,7 @@ const Home = () => {
     <div className="bg-zinc-900 text-white min-h-screen">
 
       {/* ✅ Hero Section with Text Animation */}
-      <section  style="height: calc(100vh - 4.5rem);" className="relative flex flex-col items-center justify-center text-center px-6 md:px-16 bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg">
+      <section className="relative custom-height flex flex-col items-center justify-center text-center px-6 md:px-16 bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg">
         <div className={`text-2xl my-4 font-bold text-blue-400 hover:text-blue-500 flex flex-col flex-wrap justify-center items-center gap-2 transition ${isVisible ? "opacity-100" : "opacity-0"}`}>
           <img
             src="/icon2.png"

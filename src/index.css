@@ -85,3 +85,8 @@ body::-webkit-scrollbar{
 #formToast {
   animation: toastInOut 5s ease-in-out forwards;
 }
+
+
+.custom-height {
+  height: calc(100vh - 4.5rem);
+}
