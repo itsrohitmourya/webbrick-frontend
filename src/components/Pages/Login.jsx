@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../app/slices/authSlice';
 import { loginUser } from '../../services/api';
 import { useNavigate, Link } from 'react-router-dom';
+import { Loader } from '../../index';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -75,13 +76,13 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 text-white font-bold rounded-lg transition transform duration-300 ${
+            className={`w-full py-3 text-white font-bold rounded-lg flex items-center justify-center transition transform duration-300 ${
               loading
                 ? 'bg-gray-600 cursor-not-allowed'
                 : 'bg-teal-500 hover:bg-teal-400 hover:scale-105'
             }`}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            Login
           </button>
         </form>
 
@@ -98,6 +99,8 @@ function Login() {
           </p>
         </div>
       </div>
+      {loading && <Loader />}
+      {/* <Loader/> */}
     </div>
   );
 }

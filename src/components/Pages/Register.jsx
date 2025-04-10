@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { registerUser } from '../../services/api';
 import { useNavigate, Link } from 'react-router-dom';
+import { Loader } from '../../index';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -87,7 +88,7 @@ function Register() {
                 : 'bg-teal-500 hover:bg-teal-400 hover:scale-105'
             }`}
           >
-            {loading ? 'Registering...' : 'Register'}
+            Register
           </button>
         </form>
 
@@ -104,6 +105,7 @@ function Register() {
           </p>
         </div>
       </div>
+      {loading && <Loader />}
     </div>
   );
 }
