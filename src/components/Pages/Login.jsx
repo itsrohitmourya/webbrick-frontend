@@ -36,7 +36,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center gradient-animation px-6">
+    <div className="custom-height flex items-center justify-center gradient-animation px-6">
       <div className="w-full max-w-lg bg-zinc-800 shadow-lg rounded-lg p-10 relative z-10">
 
         {/* Title */}
