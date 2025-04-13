@@ -1,6 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePageCode } from "../../app/slices/ProjectManSlice";
+import {Toast} from "../../index";
+import { toggleToast } from "../../app/slices/ElementsSlice";
 
 function Canvas() {
   const screenSize = useSelector((state) => state.screenSize.screenSize);
@@ -12,7 +14,9 @@ function Canvas() {
   const iframeDocumentRef = useRef(null); // To store the iframe document
   const autoSave = useSelector((state) => state.autoSave.autoSave);
   const manualSave = useSelector((state) => state.autoSave.manualSave)
-  const scratchBuild = useSelector((state) => state.scratchBuild.scratchBuild)
+  const Elements = useSelector((state) => state.Elements.Elements)
+  const [toastMsg, settoastMsg] = useState('')
+  const [Icon, setIcon] = useState(null)
 
   // Update iframe content whenever curWorkPage or sitePages changes
   useEffect(() => {
@@ -55,62 +59,120 @@ function Canvas() {
     }
   }, [autoSave, manualSave]);
 
+  const handleToast = (msg, icon) => {
+    settoastMsg(msg); 
+    setIcon(icon)
+    dispatch(toggleToast())
+    setTimeout(() => {
+      settoastMsg('')
+      setIcon(null)
+      dispatch(toggleToast())
+    }, 4000)
+  }
 
   // handle Drop
   const handleDrop = (e) => {
     e.preventDefault();
-
     const droppedData = JSON.parse(e.dataTransfer.getData("text/plain"));
-    const category = droppedData.category;
     const dataKey = droppedData.dataKey;
-
+  
     let html = null;
     let css = null;
     let js = null;
-
-    if (scratchBuild[category] && scratchBuild[category][dataKey]) {
-      let elementCode = scratchBuild[category][dataKey].code;
-      elementCode.forEach((element) => {
-        html = element.html ? element.html : html;
-        css = element.css ? element.css : css;
-        js = element.js ? element.js : js;
-      });
-    } else {
-      console.error(`Element not found: scratchBuild[${category}][${dataKey}]`);
+    let devJs = null;
+  
+    if (Elements[dataKey]) {
+      const elementCode = Elements[dataKey].code;
+      if (elementCode) {
+        html = elementCode.html || null;
+        css = elementCode.css || null;
+        js = elementCode.js || null;
+        devJs = elementCode.devjs || null; // ✅ support for devScript
+      }
     }
-
+  
     const iframeDocument = iframeDocumentRef.current;
-    if (iframeDocument) {
-      const body = iframeDocument.querySelector("body");
-      const style = iframeDocument.querySelector("#userStyle");
-      if (!style) {
-        const newStyle = iframeDocument.createElement("style");
-        newStyle.id = "userStyle";
-        body.appendChild(newStyle);
-      }
-      if (body && style) {
-        if (html) {
-          body.innerHTML += html;
-        }
-        if (css) {
-          style.textContent += css;
-        }
-      }
-
-      // ✅ Prevent duplicate JS execution
-      if (js) {
-        let existingScript = iframeDocument.querySelector("#userScript");
-        if (!existingScript) {
-          let newScript = iframeDocument.createElement("script");
-          newScript.textContent = js;
-          newScript.id = "userScript";
-          body.appendChild(newScript);
-        }
-      }
-    } else {
+    if (!iframeDocument) {
       console.error("Iframe document not ready.");
+      return;
     }
+  
+    const body = iframeDocument.querySelector("body");
+    const head = iframeDocument.querySelector("head");
+  
+    // ✅ Handle Style
+    let style = iframeDocument.querySelector("#userStyle");
+    if (!style) {
+      style = iframeDocument.createElement("style");
+      style.id = "userStyle";
+      head.appendChild(style);
+      console.log("Style created");
+    }
+  
+    // ✅ Prevent duplicate nav/footer
+    const navExists = iframeDocument.querySelector("nav");
+    const footerExists = iframeDocument.querySelector("footer");
+  
+    if (body && style) {
+      if (html) {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        const containsNav = tempDiv.querySelector("nav");
+        const containsFooter = tempDiv.querySelector("footer");
+  
+        let shouldInsert = true;
+        if (containsNav && navExists) {
+          handleToast("Nav already exists", 'error')
+          shouldInsert = false;
+        }
+        if (containsFooter && footerExists) {
+          handleToast("Footer already exists", 'error')
+          shouldInsert = false;
+        }
+  
+        if (shouldInsert) {
+          body.insertAdjacentHTML("beforeend", html);
+        }
+      }
+  
+      if (css) {
+        style.textContent += "\n" + css;
+      }
+    }
+  
+    // ✅ Handle userScript: logic from components
+    if (js) {
+      const existingUserScript = iframeDocument.querySelector("#userScript");
+      let existingJS = "";
+      if (existingUserScript) {
+        existingJS = existingUserScript.textContent;
+        existingUserScript.remove();
+      }
+  
+      const newUserScript = iframeDocument.createElement("script");
+      newUserScript.id = "userScript";
+      newUserScript.textContent = `${existingJS}\n${js}`;
+      body.appendChild(newUserScript);
+    }
+  
+    // ✅ Handle devScript: logic from dev-side helpers
+    if (devJs) {
+      const existingDevScript = iframeDocument.querySelector("#devScript");
+      let existingDevJS = "";
+      if (existingDevScript) {
+        existingDevJS = existingDevScript.textContent;
+        existingDevScript.remove();
+      }
+  
+      const newDevScript = iframeDocument.createElement("script");
+      newDevScript.id = "devScript";
+      newDevScript.textContent = `${existingDevJS}\n${devJs}`;
+      body.appendChild(newDevScript);
+    }
+  
+    console.log("iframe updated");
   };
+  
 
   return (
     <div
@@ -123,12 +185,12 @@ function Canvas() {
       </span>
       {pages.length > 0 ? (
         <>
-            <span
-              style={{ transition: "width 0.5s ease", width: screenSize }}
-              className="text-white px-2 text-lg"
-            >
-              {pages[curWorkPage]?.pageName}
-            </span>
+          <span
+            style={{ transition: "width 0.5s ease", width: screenSize }}
+            className="text-white px-2 text-lg"
+          >
+            {pages[curWorkPage]?.pageName}
+          </span>
           <div
             style={{ width: screenSize, transition: "width 0.5s ease" }}
             className="h-[95%]"
@@ -142,6 +204,9 @@ function Canvas() {
           </div>
         </>
       ) : null}
+      {
+        toastMsg && <Toast msg={toastMsg} icon={Icon} />
+      }
     </div>
   );
 }

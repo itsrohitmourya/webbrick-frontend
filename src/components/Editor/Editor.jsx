@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Canvas, Navbar, SideBar, AutoSaveHandler } from '../../index'
+import { Canvas, Navbar, SideBar, AutoSaveHandler} from '../../index'
 import { useSelector } from 'react-redux'
 
 function Editor() {

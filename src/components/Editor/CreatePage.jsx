@@ -119,7 +119,7 @@ function CreatePage() {
 
             {pages.length > 0 && (
                 <>
-                    <div id='scrollNone' className='min-h-max box-border p-2 w-full flex flex-col overflow-hidden gap-2'>
+                    <div id='scrollNone' className='min-h-max max-h-94 box-border p-2 w-full flex flex-col overflow-hidden gap-2'>
                         <span className='w-full h-max flex text-white capitalize'>Your Pages :</span>
                         <div
                             id='scrollNone'

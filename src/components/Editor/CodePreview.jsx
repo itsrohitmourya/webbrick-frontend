@@ -23,6 +23,8 @@ function CodePreview() {
         doc.querySelectorAll("[draggable]").forEach((el) => el.removeAttribute("draggable"));
         const devStyle = doc.querySelector("#devStyle");
         if (devStyle) devStyle.remove();
+        const userStyle = doc.querySelector("#userStyle");
+        if (userStyle) userStyle.removeAttribute("id");
         const userScript = doc.querySelector("#userScript");
         if (userScript) userScript.removeAttribute("id");
         const devScript = doc.querySelector("#devScripts");
@@ -60,6 +62,10 @@ function CodePreview() {
                     customStyle={{
                         whiteSpace: "pre-wrap",
                         wordBreak: "break-word",
+                        padding: "1rem", 
+                        lineHeight: "1.4", 
+                        fontFamily: "'Fira Code', monospace", 
+                        fontSize: "16px", 
                     }}
                     codeTagProps={{
                         style: {

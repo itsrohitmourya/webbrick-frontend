@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { CreatePage, ScratchBuild } from '../../index'
+import { CreatePage,  SearchElements } from '../../index'
 import { useSelector } from 'react-redux'
 
 function CompPanel() {
@@ -51,7 +51,10 @@ function CompPanel() {
       }
       <div id='scrollNone' className='w-full h-full overflow-y-scroll flex flex-col justify-start items-center'>
       {
-        activeSection === "addElements" && <ScratchBuild/>
+        activeSection === "addElements" &&
+        <>
+        <SearchElements/>
+        </>
       }
       </div>
     </div>

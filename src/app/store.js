@@ -10,23 +10,23 @@ import scratchBuildReducer from './slices/scratchBuildSlice';
 import projectManReducer from './slices/ProjectManSlice';
 import authReducer from './slices/authSlice';
 
-// ✅ Transform to persist only the `projects` key
+
 const projectTransform = createTransform(
-  (inboundState) => ({ projects: inboundState.projects }),       // Save only `projects`
-  (outboundState) => ({ projects: outboundState.projects }),     // Restore only `projects`
-  { whitelist: ['projectMan'] }                                  // Apply to `projectMan`
+  (inboundState) => ({ projects: inboundState.projects }),       
+  (outboundState) => ({ projects: outboundState.projects }),     
+  { whitelist: ['projectMan'] }                                  
 );
 
 const persistConfigAuth = {
   key: 'auth',
   storage,
-  whitelist: ['auth']      // ✅ Persist only the auth slice
+  whitelist: ['auth']      
 };
 
 const persistConfigProjects = {
   key: 'projectMan',
   storage,
-  transforms: [projectTransform]  // ✅ Apply the transform to persist only `projects`
+  transforms: [projectTransform]  
 };
 
 const rootReducer = {
@@ -36,10 +36,7 @@ const rootReducer = {
   Elements: ElementsReducer,
   scratchBuild: scratchBuildReducer,
   
-  // ✅ Persist `projectMan` slice but only the `projects` key
   projectMan: persistReducer(persistConfigProjects, projectManReducer),
-  
-  // ✅ Persist `auth` slice
   auth: persistReducer(persistConfigAuth, authReducer)
 };
 
@@ -48,7 +45,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // ✅ Ignore Redux Persist non-serializable actions
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
       },
     }),
