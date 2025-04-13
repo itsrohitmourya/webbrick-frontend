@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  autoSave: true,
+  autoSave: false,
   autoSaveToolTip : false,
   manualSave : false
 };
