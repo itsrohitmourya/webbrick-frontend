@@ -31,6 +31,10 @@ function Toolbar() {
         if (userScript) {
             userScript.removeAttribute("id");
         }
+        const useStyle = doc.querySelector("#userStyle");
+        if (useStyle) {
+            useStyle.removeAttribute("id");
+        }
 
         return doc.documentElement.outerHTML;
     };
