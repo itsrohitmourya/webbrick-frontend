@@ -28,9 +28,9 @@ function ElementsCards() {
               draggable
             >
               <div
-                className="p-[4px] rounded-lg rounded-t-[0px] bg-gradient-to-r from-[#8E2DE2] to-[#4A00E0]"
+                className="p-[4px] rounded-2xl rounded-t-[0px] bg-gradient-to-r from-[#8E2DE2] to-[#4A00E0]"
               >
-                <div className="h-max py-2 bg-gray-900 flex items-center justify-center">
+                <div className="h-max bg-gray-900 flex items-center justify-center">
                   <img
                     src={element.preview}
                     alt={element.type}
