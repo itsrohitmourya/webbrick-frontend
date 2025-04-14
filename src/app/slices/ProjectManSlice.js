@@ -108,8 +108,8 @@ const initialState = {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Drag & Drop with Context Menu</title>
-  <style id='devStyle'>
-    * {
+  <style id='userStyle'>
+   * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -118,7 +118,13 @@ const initialState = {
       body{
       background: #121212;
       }
+      body::-webkit-scrollbar{
+      display: none;
+      }
 
+  </style>
+  <style id='devStyle'>
+   
     .draggable {
       min-height: 80px;
       padding: 15px;

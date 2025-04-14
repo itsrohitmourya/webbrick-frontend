@@ -130,7 +130,7 @@ function ProfileMenu() {
                     className="flex items-center justify-between py-2 px-4 bg-gray-600 rounded-md hover:bg-gray-500 active:bg-gray-400 transition-all"
                     onClick={() => handleAutoSave()}
                 >
-                    <span className="flex items-center gap-2"><FolderSync size={iconSize} /> Autosave</span>
+                    <span className="flex items-center gap-2"><FolderSync size={iconSize} /> Autosave </span>
                     {autoSaveFiles ? <ToggleRight size={30} /> : <ToggleLeft size={30} />}
                 </button>
 

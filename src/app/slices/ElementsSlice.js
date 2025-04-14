@@ -101,7 +101,7 @@ const initialState = {
         flex-direction: column;
         background: #007bff;
         position: absolute;
-        top: 40px;
+        top: 60px;
         right: 0;
         width: 100%;
         text-align: center;
@@ -282,6 +282,105 @@ const initialState = {
       hamburger.classList.toggle('active');
       menu.classList.toggle('active');
     });`
+      }
+    },
+    {
+      preview : '/hero1.png',
+      type : 'hero',
+      name : 'Hero Section1',
+      code : {
+        html : `<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga">
+  <div class="hero-container-wb-2x9a">
+    <div class="hero-imagewrap-wb-52jc">
+      <img
+        src="/icon2.png"
+        alt="Web design preview"
+        class="hero-image-wb-0apm"
+      />
+    </div>
+    <div class="hero-content-wb-98lv">
+      <h1 class="hero-title-wb-q1z4">Design Websites Without Limits</h1>
+      <p class="hero-subtext-wb-f7ne">
+        Build and launch beautiful, responsive websites faster than ever — with no coding skills required.
+      </p>
+      <a href="/start" class="hero-cta-btn-wb-7ldp">Get Started Now</a>
+    </div>
+  </div>
+</section>`,
+css : `body {
+      line-height: 1.6;
+    }
+    .hero-banner-wb-32ga {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2.5rem 1.25rem; /* 40px 20px converted to rem */
+      background: linear-gradient(135deg, #282c34, #3a3f47);
+      color: white;
+      text-align: center;
+    }
+    .hero-container-wb-2x9a {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100vw;
+      margin: auto;
+      align-items: center;
+    }
+    .hero-content-wb-98lv {
+      flex: 1;
+      padding: 1.25rem;
+    }
+    .hero-title-wb-q1z4 {
+      font-size: 2.5rem; /* 2.5em remains unchanged */
+      margin-bottom: 0.9375rem; /* 15px converted to rem */
+      color: #61dafb;
+    }
+    .hero-subtext-wb-f7ne {
+      font-size: 1.2rem; /* 1.2em remains unchanged */
+      margin-bottom: 1.5625rem; /* 25px converted to rem */
+      color: #dcdcdc;
+    }
+    .hero-cta-btn-wb-7ldp {
+      padding: 0.75rem 1.5625rem; /* 12px 25px converted to rem */
+      background-color: #61dafb;
+      color: #282c34;
+      border: none;
+      border-radius: 1.5625rem; /* 25px converted to rem */
+      cursor: pointer;
+      font-size: 1rem; /* 1em remains unchanged */
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .hero-cta-btn-wb-7ldp:hover {
+      background-color: #4fb8e6;
+    }
+    .hero-imagewrap-wb-52jc {
+      flex: 1;
+      text-align: center;
+      height: max-content;
+      width: max-content;
+    }
+    .hero-image-wb-0apm {
+      max-width: clamp(15rem, 20vw, 30rem); 
+      height: auto;
+      border-radius: 0.625rem; /* 10px converted to rem */
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 0 4px 8px converted to rem */
+    }
+    @media (max-width: 48rem) { /* 768px converted to rem */
+      .hero-container-wb-2x9a {
+        flex-direction: column;
+      }
+      .hero-title-wb-q1z4 {
+        font-size: 2rem; /* 2em remains unchanged */
+      }
+      .hero-subtext-wb-f7ne {
+        font-size: 1rem; /* 1em remains unchanged */
+      }
+      .hero-cta-btn-wb-7ldp {
+        font-size: 0.9rem; /* 0.9em remains unchanged */
+      }
+    }`,
+js : ''
       }
     }
   ],

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePageCode } from "../../app/slices/ProjectManSlice";
-import {Toast} from "../../index";
+import { Toast } from "../../index";
 import { toggleToast } from "../../app/slices/ElementsSlice";
 
 function Canvas() {
@@ -35,6 +35,16 @@ function Canvas() {
     iframeDoc.close();
 
     iframeDocumentRef.current = iframeDoc;
+    setTimeout(() => {
+      const links = iframeDoc.querySelectorAll("a");
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          if (window.location.href.includes("editor")) {
+            e.preventDefault(); // prevent default navigation
+          }
+        });
+      });
+    }, 100); // give slight delay to allow rendering
   }, [curWorkPage, pages]);
 
 
@@ -60,7 +70,7 @@ function Canvas() {
   }, [autoSave, manualSave]);
 
   const handleToast = (msg, icon) => {
-    settoastMsg(msg); 
+    settoastMsg(msg);
     setIcon(icon)
     dispatch(toggleToast())
     setTimeout(() => {
@@ -75,12 +85,12 @@ function Canvas() {
     e.preventDefault();
     const droppedData = JSON.parse(e.dataTransfer.getData("text/plain"));
     const dataKey = droppedData.dataKey;
-  
+
     let html = null;
     let css = null;
     let js = null;
     let devJs = null;
-  
+
     if (Elements[dataKey]) {
       const elementCode = Elements[dataKey].code;
       if (elementCode) {
@@ -90,16 +100,16 @@ function Canvas() {
         devJs = elementCode.devjs || null; // ✅ support for devScript
       }
     }
-  
+
     const iframeDocument = iframeDocumentRef.current;
     if (!iframeDocument) {
       console.error("Iframe document not ready.");
       return;
     }
-  
+
     const body = iframeDocument.querySelector("body");
     const head = iframeDocument.querySelector("head");
-  
+
     // ✅ Handle Style
     let style = iframeDocument.querySelector("#userStyle");
     if (!style) {
@@ -108,18 +118,18 @@ function Canvas() {
       head.appendChild(style);
       console.log("Style created");
     }
-  
+
     // ✅ Prevent duplicate nav/footer
     const navExists = iframeDocument.querySelector("nav");
     const footerExists = iframeDocument.querySelector("footer");
-  
+
     if (body && style) {
       if (html) {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = html;
         const containsNav = tempDiv.querySelector("nav");
         const containsFooter = tempDiv.querySelector("footer");
-  
+
         let shouldInsert = true;
         if (containsNav && navExists) {
           handleToast("Nav already exists", 'error')
@@ -129,17 +139,17 @@ function Canvas() {
           handleToast("Footer already exists", 'error')
           shouldInsert = false;
         }
-  
+
         if (shouldInsert) {
           body.insertAdjacentHTML("beforeend", html);
         }
       }
-  
+
       if (css) {
         style.textContent += "\n" + css;
       }
     }
-  
+
     // ✅ Handle userScript: logic from components
     if (js) {
       const existingUserScript = iframeDocument.querySelector("#userScript");
@@ -148,13 +158,13 @@ function Canvas() {
         existingJS = existingUserScript.textContent;
         existingUserScript.remove();
       }
-  
+
       const newUserScript = iframeDocument.createElement("script");
       newUserScript.id = "userScript";
       newUserScript.textContent = `${existingJS}\n${js}`;
       body.appendChild(newUserScript);
     }
-  
+
     // ✅ Handle devScript: logic from dev-side helpers
     if (devJs) {
       const existingDevScript = iframeDocument.querySelector("#devScript");
@@ -163,16 +173,15 @@ function Canvas() {
         existingDevJS = existingDevScript.textContent;
         existingDevScript.remove();
       }
-  
+
       const newDevScript = iframeDocument.createElement("script");
       newDevScript.id = "devScript";
       newDevScript.textContent = `${existingDevJS}\n${devJs}`;
       body.appendChild(newDevScript);
     }
-  
+
     console.log("iframe updated");
   };
-  
 
   return (
     <div
