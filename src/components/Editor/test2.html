@@ -1,106 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Hero Section</title>
+  <title>Modern Newsletter Section</title>
   <style>
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
-      line-height: 1.6;
-    }
-    .hero-banner-wb-32ga {
+      background: #f9fafb;
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2.5rem 1.25rem; /* 40px 20px converted to rem */
-      background: linear-gradient(135deg, #282c34, #3a3f47);
-      color: white;
+      height: 100vh;
+    }
+
+    .wb-newsletter2025 {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      padding: 40px;
       text-align: center;
     }
-    .hero-container-wb-2x9a {
+
+    .wb-newsletter2025 h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #1e293b;
+    }
+
+    .wb-newsletter2025 p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #64748b;
+    }
+
+    .wb-newsletter2025-form {
       display: flex;
-      flex-wrap: wrap;
-      width: 100vw;
-      margin: auto;
+      justify-content: center;
       align-items: center;
+      flex-direction: column;
+      gap: 15px;
+      padding: 1rem;
     }
-    .hero-content-wb-98lv {
-      flex: 1;
-      padding: 1.25rem;
+
+    .wb-newsletter2025-form input {
+      padding: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      width: 93.5%;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
     }
-    .hero-title-wb-q1z4 {
-      font-size: 2.5rem; /* 2.5em remains unchanged */
-      margin-bottom: 0.9375rem; /* 15px converted to rem */
-      color: #61dafb;
+
+    .wb-newsletter2025-form input:focus {
+      border-color: #38bdf8;
     }
-    .hero-subtext-wb-f7ne {
-      font-size: 1.2rem; /* 1.2em remains unchanged */
-      margin-bottom: 1.5625rem; /* 25px converted to rem */
-      color: #dcdcdc;
+
+    .wb-newsletter2025-form input::placeholder {
+      color: #94a3b8;
     }
-    .hero-cta-btn-wb-7ldp {
-      padding: 0.75rem 1.5625rem; /* 12px 25px converted to rem */
-      background-color: #61dafb;
-      color: #282c34;
+
+    .wb-newsletter2025-form button {
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      color: white;
+      padding: 14px;
       border: none;
-      border-radius: 1.5625rem; /* 25px converted to rem */
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
-      font-size: 1rem; /* 1em remains unchanged */
-      text-decoration: none;
-      transition: background-color 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
     }
-    .hero-cta-btn-wb-7ldp:hover {
-      background-color: #4fb8e6;
-    }
-    .hero-imagewrap-wb-52jc {
-      flex: 1;
-      text-align: center;
-      height: max-content;
-      width: max-content;
-    }
-    .hero-image-wb-0apm {
-      max-width: clamp(15rem, 20vw, 30rem); 
-      height: auto;
-      border-radius: 0.625rem; /* 10px converted to rem */
-      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 0 4px 8px converted to rem */
-    }
-    @media (max-width: 48rem) { /* 768px converted to rem */
-      .hero-container-wb-2x9a {
-        flex-direction: column;
-      }
-      .hero-title-wb-q1z4 {
-        font-size: 2rem; /* 2em remains unchanged */
-      }
-      .hero-subtext-wb-f7ne {
-        font-size: 1rem; /* 1em remains unchanged */
-      }
-      .hero-cta-btn-wb-7ldp {
-        font-size: 0.9rem; /* 0.9em remains unchanged */
-      }
+
+    .wb-newsletter2025-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
+
 <body>
-<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga">
-  <div class="hero-container-wb-2x9a">
-    <div class="hero-imagewrap-wb-52jc">
-      <img
-        src="/Client/public/icon2.png"
-        alt="Web design preview"
-        class="hero-image-wb-0apm"
-      />
-    </div>
-    <div class="hero-content-wb-98lv">
-      <h1 class="hero-title-wb-q1z4">Design Websites Without Limits</h1>
-      <p class="hero-subtext-wb-f7ne">
-        Build and launch beautiful, responsive websites faster than ever — with no coding skills required.
-      </p>
-      <a href="/start" class="hero-cta-btn-wb-7ldp">Get Started Now</a>
-    </div>
-  </div>
-</section>
+  <section class="wb-newsletter2025">
+    <h2>Stay Updated</h2>
+    <p>Subscribe to receive the latest news and updates directly in your inbox.</p>
+    <form class="wb-newsletter2025-form">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
 </body>
+
 </html>

@@ -26,26 +26,26 @@ function SearchElements() {
 
     return (
         <>
-            <div className="w-full h-max p-4 pb-0 flex flex-col">
+            <div className="w-full  justify-center items-center h-max py-4  flex flex-col">
                 {/* 🔍 Search Box */}
                 <input
                     type="text"
                     placeholder="Search components..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-4 py-2 outline-none rounded-lg border-2 text-white border-violet-500"
+                    className="w-[90%] px-4 py-2 outline-none rounded-lg border-2 text-white border-violet-500"
                 />
 
                 {/* 🔽 Search Results */}
                 {searchTerm && (
                     <div
-                        className=" w-full pt-4 overflow-scroll flex flex-col gap-4"
+                        className=" w-full justify-center items-center py-4 overflow-scroll flex flex-col gap-4"
                         id="scrollNone"
                     >
                         {filteredElements.length > 0 ? (
                             filteredElements.map((element, index) => (
                                 <div
-                                    className="relative min-h-max max-h-44 overflow-hidden hover:scale-105 transform transition-all ease-in-out duration-300 cursor-grab"
+                                    className="relative w-[90%] min-h-max max-h-44 overflow-hidden hover:scale-105 transform transition-all ease-in-out duration-300 cursor-grab"
                                     key={index}
                                     data-key={index}
                                     onDragStart={handleDragStart}

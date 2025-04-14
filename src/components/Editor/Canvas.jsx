@@ -11,14 +11,13 @@ function Canvas() {
   const curWorkPage = useSelector((state) => state.projectMan.curWorkPage);
   const dispatch = useDispatch();
   const iframeRef = useRef(null);
-  const iframeDocumentRef = useRef(null); // To store the iframe document
+  const iframeDocumentRef = useRef(null);
   const autoSave = useSelector((state) => state.autoSave.autoSave);
   const manualSave = useSelector((state) => state.autoSave.manualSave)
   const Elements = useSelector((state) => state.Elements.Elements)
   const [toastMsg, settoastMsg] = useState('')
   const [Icon, setIcon] = useState(null)
 
-  // Update iframe content whenever curWorkPage or sitePages changes
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
@@ -29,7 +28,6 @@ function Canvas() {
       return;
     }
 
-    // ✅ Ensure a clean iframe before injecting new content
     iframeDoc.open();
     iframeDoc.write(pages[curWorkPage]?.pageCode || "<html><head></head><body></body></html>");
     iframeDoc.close();
@@ -40,16 +38,13 @@ function Canvas() {
       links.forEach((link) => {
         link.addEventListener("click", (e) => {
           if (window.location.href.includes("editor")) {
-            e.preventDefault(); // prevent default navigation
+            e.preventDefault();
           }
         });
       });
-    }, 100); // give slight delay to allow rendering
+    }, 100);
   }, [curWorkPage, pages]);
 
-
-
-  // autoSave 
   const updateLivePageCode = () => {
     const iframe = iframeRef.current;
     if (!iframe) return;
@@ -80,7 +75,6 @@ function Canvas() {
     }, 4000)
   }
 
-  // handle Drop
   const handleDrop = (e) => {
     e.preventDefault();
     const droppedData = JSON.parse(e.dataTransfer.getData("text/plain"));
@@ -97,7 +91,7 @@ function Canvas() {
         html = elementCode.html || null;
         css = elementCode.css || null;
         js = elementCode.js || null;
-        devJs = elementCode.devjs || null; // ✅ support for devScript
+        devJs = elementCode.devjs || null;
       }
     }
 
@@ -110,7 +104,6 @@ function Canvas() {
     const body = iframeDocument.querySelector("body");
     const head = iframeDocument.querySelector("head");
 
-    // ✅ Handle Style
     let style = iframeDocument.querySelector("#userStyle");
     if (!style) {
       style = iframeDocument.createElement("style");
@@ -119,38 +112,38 @@ function Canvas() {
       console.log("Style created");
     }
 
-    // ✅ Prevent duplicate nav/footer
-    const navExists = iframeDocument.querySelector("nav");
-    const footerExists = iframeDocument.querySelector("footer");
+    if (html) {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = html;
+      
+      const droppedNav = Array.from(tempDiv.children).some(child => child.tagName.toLowerCase() === "nav");
+      const droppedFooter = Array.from(tempDiv.children).some(child => child.tagName.toLowerCase() === "footer");
+      
+      const iframeNav = Array.from(iframeDocument.body.children).some(child => child.tagName.toLowerCase() === "nav");
+      const iframeFooter = Array.from(iframeDocument.body.children).some(child => child.tagName.toLowerCase() === "footer");
+      
 
-    if (body && style) {
-      if (html) {
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = html;
-        const containsNav = tempDiv.querySelector("nav");
-        const containsFooter = tempDiv.querySelector("footer");
+      let shouldInsert = true;
 
-        let shouldInsert = true;
-        if (containsNav && navExists) {
-          handleToast("Nav already exists", 'error')
-          shouldInsert = false;
-        }
-        if (containsFooter && footerExists) {
-          handleToast("Footer already exists", 'error')
-          shouldInsert = false;
-        }
-
-        if (shouldInsert) {
-          body.insertAdjacentHTML("beforeend", html);
-        }
+      if (droppedNav && iframeNav) {
+        handleToast("Nav already exists", 'error');
+        shouldInsert = false;
       }
 
-      if (css) {
-        style.textContent += "\n" + css;
+      if (droppedFooter && iframeFooter) {
+        handleToast("Footer already exists", 'error');
+        shouldInsert = false;
+      }
+
+      if (shouldInsert) {
+        body.insertAdjacentHTML("beforeend", html);
       }
     }
 
-    // ✅ Handle userScript: logic from components
+    if (css) {
+      style.textContent += "\n" + css;
+    }
+
     if (js) {
       const existingUserScript = iframeDocument.querySelector("#userScript");
       let existingJS = "";
@@ -165,7 +158,6 @@ function Canvas() {
       body.appendChild(newUserScript);
     }
 
-    // ✅ Handle devScript: logic from dev-side helpers
     if (devJs) {
       const existingDevScript = iframeDocument.querySelector("#devScript");
       let existingDevJS = "";
