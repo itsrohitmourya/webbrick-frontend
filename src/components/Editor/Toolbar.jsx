@@ -31,9 +31,9 @@ function Toolbar() {
         if (userScript) {
             userScript.removeAttribute("id");
         }
-        const useStyle = doc.querySelector("#userStyle");
-        if (useStyle) {
-            useStyle.removeAttribute("id");
+        const userStyle = doc.querySelector("#userStyle");
+        if (userStyle) {
+            userStyle.removeAttribute("id");
         }
 
         return doc.documentElement.outerHTML;

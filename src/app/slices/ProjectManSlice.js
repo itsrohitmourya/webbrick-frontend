@@ -119,7 +119,7 @@ const initialState = {
       background: #121212;
       }
       body::-webkit-scrollbar{
-      display: none;
+      display: none !important;
       }
 
   </style>
