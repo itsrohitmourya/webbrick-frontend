@@ -34,7 +34,7 @@ const Home = () => {
           <img
             src="/icon2.png"
             alt="logo"
-            className='h-auto w-14 sm:w-14 md:w-14 lg:w-14'
+            className='h-auto w-24 sm:w-30 md:w-30 lg:w-34 '
           />
           <span className='text-5xl sm:text-6xl md:text-6xl lg:text-6xl bg-gradient-to-r from-purple-600 to-blue-400 bg-clip-text text-transparent font-extrabold font-[Poppins] mt-[4px]'>
             WebBrick
