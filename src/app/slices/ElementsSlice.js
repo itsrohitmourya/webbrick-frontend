@@ -141,7 +141,7 @@ const initialState = {
     {
       preview : '/nav2.png',
       type : 'nav',
-      name : 'Nav Bar 2',
+      name : 'Nav Bar',
       code : {
         html : `<nav class="nav-wrap-uniq">
     <div class="brand-uniq">WebBrand</div>
@@ -287,7 +287,7 @@ const initialState = {
     {
       preview : '/hero1.png',
       type : 'hero',
-      name : 'Hero Section1',
+      name : 'Hero Section',
       code : {
         html : `<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga">
   <div class="hero-container-wb-2x9a">
