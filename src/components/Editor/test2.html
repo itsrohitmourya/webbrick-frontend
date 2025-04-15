@@ -1,100 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Newsletter Section</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixed WebBrand Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #f9fafb;
-      color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .wb-newsletter2025 {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      padding: 40px;
-      text-align: center;
+    body {
+      font-family: 'Poppins', sans-serif;
     }
 
-    .wb-newsletter2025 h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #1e293b;
-    }
-
-    .wb-newsletter2025 p {
-      font-size: 1rem;
-      margin-bottom: 30px;
-      color: #64748b;
-    }
-
-    .wb-newsletter2025-form {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 15px;
-      padding: 1rem;
-    }
-
-    .wb-newsletter2025-form input {
-      padding: 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      width: 93.5%;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    .wb-newsletter2025-form input:focus {
-      border-color: #38bdf8;
-    }
-
-    .wb-newsletter2025-form input::placeholder {
-      color: #94a3b8;
-    }
-
-    .wb-newsletter2025-form button {
-      background: linear-gradient(135deg, #38bdf8, #0284c7);
-      color: white;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .wbNav12x-container {
       width: 100%;
+      background-color: #111111;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 999;
     }
 
-    .wb-newsletter2025-form button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    .wbNav12x-brand {
+      font-size: 24px;
+      font-weight: 600;
+      color: #4fd1c5;
+    }
+
+    .wbNav12x-menu {
+      display: flex;
+      gap: 32px;
+    }
+
+    .wbNav12x-menu li {
+      list-style: none;
+    }
+
+    .wbNav12x-menu a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .wbNav12x-menu a:hover {
+      color: #4fd1c5;
+    }
+
+    .wbNav12x-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 28px;
+      height: 24px;
+      gap: 5px;
+      z-index: 1001;
+    }
+
+    .wbNav12x-hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Transform hamburger to X */
+    .wbNav12x-hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .wbNav12x-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .wbNav12x-hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 768px) {
+      .wbNav12x-menu {
+        border: 2px solid red;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #111111;
+        padding: 24px;
+        gap: 20px;
+        display: none;
+      }
+
+      .wbNav12x-menu.active {
+        display: flex;
+      }
+
+      .wbNav12x-hamburger {
+        display: flex;
+      }
     }
   </style>
 </head>
-
 <body>
-  <section class="wb-newsletter2025">
-    <h2>Stay Updated</h2>
-    <p>Subscribe to receive the latest news and updates directly in your inbox.</p>
-    <form class="wb-newsletter2025-form">
-      <input type="email" placeholder="Enter your email" required />
-      <button type="submit">Subscribe</button>
-    </form>
-  </section>
-</body>
 
+  <nav class="wbNav12x-container" role="navigation" aria-label="Main navigation">
+    <div class="wbNav12x-brand">WebBrand</div>
+    <div class="wbNav12x-hamburger" id="wbNav12x-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="wbNav12x-menu" id="wbNav12x-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    const toggle = document.getElementById('wbNav12x-toggle');
+    const menu = document.getElementById('wbNav12x-menu');
+
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('active');
+    });
+  </script>
+
+</body>
 </html>
