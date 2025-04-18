@@ -30,7 +30,7 @@ function CodePreview() {
         const devScript = doc.querySelector("#devScripts");
         if (devScript) devScript.remove();
 
-        ✅ New Cleaning Logic: Remove `draggable` class and `contenteditable` attribute
+        // ✅ New Cleaning Logic: Remove `draggable` class and `contenteditable` attribute
         doc.querySelectorAll("[class*='draggable']").forEach((el) => {
             el.classList.remove("draggable");
         });
