@@ -18,26 +18,26 @@ function CodePreview() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(pages[curWorkPage].pageCode, "text/html");
 
-        // ✅ Existing Cleaning Logic (Do not touch)
-        doc.querySelectorAll("[dropzone]").forEach((el) => el.removeAttribute("dropzone"));
-        doc.querySelectorAll("[draggable]").forEach((el) => el.removeAttribute("draggable"));
-        const devStyle = doc.querySelector("#devStyle");
-        if (devStyle) devStyle.remove();
-        const userStyle = doc.querySelector("#userStyle");
-        if (userStyle) userStyle.removeAttribute("id");
-        const userScript = doc.querySelector("#userScript");
-        if (userScript) userScript.removeAttribute("id");
-        const devScript = doc.querySelector("#devScripts");
-        if (devScript) devScript.remove();
+        // // ✅ Existing Cleaning Logic (Do not touch)
+        // doc.querySelectorAll("[dropzone]").forEach((el) => el.removeAttribute("dropzone"));
+        // doc.querySelectorAll("[draggable]").forEach((el) => el.removeAttribute("draggable"));
+        // const devStyle = doc.querySelector("#devStyle");
+        // if (devStyle) devStyle.remove();
+        // const userStyle = doc.querySelector("#userStyle");
+        // if (userStyle) userStyle.removeAttribute("id");
+        // const userScript = doc.querySelector("#userScript");
+        // if (userScript) userScript.removeAttribute("id");
+        // const devScript = doc.querySelector("#devScripts");
+        // if (devScript) devScript.remove();
 
         // ✅ New Cleaning Logic: Remove `draggable` class and `contenteditable` attribute
-        doc.querySelectorAll("[class*='draggable']").forEach((el) => {
-            el.classList.remove("draggable");
-        });
+        // doc.querySelectorAll("[class*='draggable']").forEach((el) => {
+        //     el.classList.remove("draggable");
+        // });
 
-        doc.querySelectorAll("[contenteditable]").forEach((el) => {
-            el.removeAttribute("contenteditable");
-        });
+        // doc.querySelectorAll("[contenteditable]").forEach((el) => {
+        //     el.removeAttribute("contenteditable");
+        // });
 
         // Extract the cleaned full HTML structure
         const cleanedHTML = `<!DOCTYPE html>\n` + doc.documentElement.outerHTML;
