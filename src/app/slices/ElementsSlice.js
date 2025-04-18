@@ -7,7 +7,7 @@ const initialState = {
       type: "nav",
       name: "Nav Bar",
       code: {
-        html: `<nav id="a1b2c3" class="d4e5f6" role="navigation">
+        html: `<nav id="a1b2c3" class="d4e5f6 draggable" draggable="true" role="navigation">
     <a href="#" id="g7h8i9" class="j0k1l2">Brand</a>
     <button id="m3n4o5" class="p6q7r8" aria-label="Toggle navigation">
         <span id="line1" class="line"></span>
@@ -143,7 +143,7 @@ const initialState = {
       type: "nav",
       name: "Nav Bar",
       code: {
-        html: `  <nav class="wbNav12x-container" role="navigation" aria-label="Main navigation">
+        html: `  <nav class="wbNav12x-container draggable" draggable="true" role="navigation" aria-label="Main navigation">
     <div class="wbNav12x-brand">WebBrand</div>
     <div class="wbNav12x-hamburger" id="wbNav12x-toggle" aria-label="Toggle menu">
       <span></span>
@@ -270,7 +270,7 @@ const initialState = {
       type: "hero",
       name: "Hero Section",
       code: {
-        html: `<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga">
+        html: `<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga draggable" draggable="true">
   <div class="hero-container-wb-2x9a">
     <div class="hero-imagewrap-wb-52jc">
       <img
@@ -381,7 +381,7 @@ const initialState = {
       name: "footer",
       code: {
         html: `
-            <footer class="wb-ftr2025-footer" role="contentinfo">
+            <footer class="wb-ftr2025-footer draggable" role="contentinfo" draggable="true">
               <div class="wb-ftr2025-container">
                 <p class="wb-ftr2025-text">
                   &copy; <span id="wb-ftr2025-year">2025</span> WebBrick. All rights reserved.
@@ -447,7 +447,7 @@ const initialState = {
       type: "CTA",
       name: "CTA",
       code: {
-        html: `<section class="wb-hero2025">
+        html: `<section class="wb-hero2025 draggable" draggable="true">
     <div class="wb-hero2025-container">
       <h1 class="wb-hero2025-title">Build Websites. Effortlessly.</h1>
       <p class="wb-hero2025-subtitle">With WebBrick, design and launch beautiful pages in minutes.</p>
@@ -491,7 +491,7 @@ const initialState = {
       type: 'team-card',
       name: 'Team Card',
       code: {
-        html:`<div id="wrapper452"><section class="wb-team2025">
+        html:`<div id="wrapper452"><section class="wb-team2025 draggable" draggable="true">
     <h2 class="wb-team2025-title">Meet Our Team</h2>
     <div class="wb-team2025-grid">
       <div class="wb-team2025-card">
@@ -638,7 +638,7 @@ const initialState = {
       type: 'feature-card',
       name: 'Feature Card',
       code : {
-        html : ` <section class="wb-features2025">
+        html : ` <section class="wb-features2025 draggable" draggable="true">
     <h2 class="wb-features2025-title">Why Choose Us?</h2>
     <div class="wb-features2025-grid">
       <div class="wb-features2025-item">
@@ -692,7 +692,7 @@ js :``,
       type: 'plan-card',
       name: 'Plan Card',
       code: {
-        html : `<section class="wb-pricing2025">
+        html : `<section class="wb-pricing2025 draggable" draggable="true">
     <h2>Choose Your Plan</h2>
     <div class="wb-pricing2025-grid">
       <div class="wb-pricing2025-card">
@@ -816,7 +816,7 @@ js :``,
       type: 'newsletter',   
       name : 'Newsletter',
       code : {
-        html : `<div class="wrapper259">  <section class="wb-newsletter2025">
+        html : `<div class="wrapper259 draggable" draggable="true">  <section class="wb-newsletter2025">
     <h2>Stay Updated</h2>
     <p>Subscribe to receive the latest news and updates directly in your inbox.</p>
     <form class="wb-newsletter2025-form">
