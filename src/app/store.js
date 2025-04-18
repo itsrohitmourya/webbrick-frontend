@@ -52,9 +52,9 @@ const store = configureStore({
 
 export const persistor = persistStore(store);
 
-// // ✅ Purge old persisted state
-// persistor.purge().then(() => {
-//   console.log("Old persisted state cleared. New state will be applied.");
-// });
+// ✅ Purge old persisted state
+persistor.purge().then(() => {
+  console.log("Old persisted state cleared. New state will be applied.");
+});
 
 export default store;
