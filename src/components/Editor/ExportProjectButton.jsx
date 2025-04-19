@@ -9,11 +9,6 @@ const iconSize = 18;
 const ExportProjectButton = () => {
     const projects = useSelector((state) => state.projectMan.projects);
 
-    useEffect(() => {
-        console.log("Project data:", projects);
-    }, [projects]);
-
-    // ✅ Cleanup logic (same as CodePreview)
     const cleanHTML = (html) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");

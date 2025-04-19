@@ -8,14 +8,11 @@ const EditorLogoutSlice = createSlice({
     name: "EditorLogout",
     initialState,
     reducers : {
-        logout : (state)=>{
-            state.islogout = true
-        },
         resume : (state)=>{
-            state.islogout = false
+            state.islogout = !state.islogout
         }
     }
 })
 
-export const {logout, resume} = EditorLogoutSlice.actions
+export const { resume} = EditorLogoutSlice.actions
 export default EditorLogoutSlice.reducer

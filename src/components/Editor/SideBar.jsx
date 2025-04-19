@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { ProfileMenu, CompPanel, Exit, DomTreeView, CodePreview } from '../../index';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import {logout} from '../../app/slices/EditorLogoutSlice'
-import {toggleisCodePreview, updatePageCode} from '../../app/slices/ProjectManSlice'
+import {toggleisCodePreview} from '../../app/slices/ProjectManSlice'
+import { resume } from '../../app/slices/EditorLogoutSlice';
 
 function SideBar() {
     const [activeMenu, setactiveMenu] = useState(null)
@@ -25,18 +25,15 @@ function SideBar() {
         }
     }
     
-    const handlelogout = () => {
-      dispatch(logout())
-    }
-
-   
-    
     const isCodePreview  = useSelector((state)=> state.projectMan.isCodePreview)
 
     const getCodePreview = ()=>{
         dispatch(toggleisCodePreview())       
     }
 
+    const handleLogout = () => {
+        dispatch(resume())
+    }
     
     return (
         <div className='h-[calc(100vh- 4.5rem)] min-w-max flex justify-baseline items-start overflow-hidden border'>
@@ -89,7 +86,7 @@ function SideBar() {
                     <abbr title="Logout">
                         <button 
                         className='h-auto w-8 ml-2 cursor-pointer active:scale-70'
-                        onClick={() => handlelogout()}
+                        onClick={() => handleLogout() }
                         >
                             <LogOut color="white" size={iconSize} />
                         </button>

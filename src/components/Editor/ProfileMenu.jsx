@@ -5,7 +5,6 @@ import {
     HelpCircle,
     MessageSquare,
     Bug,
-    Database,
     FolderOpen,
     ToggleRight,
     ToggleLeft,
@@ -15,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleManualSave, toggleAutoSave, toggleAutoSaveToolTip } from "../../app/slices/autoSaveSlice";
 import store from '../../app/store'
 import { Exit, ExportProjectButton } from '../../index'
-import { logout } from "../../app/slices/EditorLogoutSlice";
+import { resume } from '../../app/slices/EditorLogoutSlice';
 import { updateExistingProject } from "../../app/slices/ProjectManSlice";
 const iconSize = 18;
 
@@ -86,9 +85,7 @@ function ProfileMenu() {
     };
 
     const islogout = useSelector((state) => state.EditorLogout.islogout)
-    const handleLogout = () => {
-        dispatch(logout())
-    }
+   
 
     const user = useSelector((state) => state.auth.user)
     const projects = useSelector((state) => state.projectMan.projects)
@@ -107,6 +104,11 @@ function ProfileMenu() {
             );
         }
     }, [autoSave, manualSave]);
+
+
+    const handleLogout = () => {
+        dispatch(resume()) 
+    }
 
     return (
         <div id="scrollNone" className='text-white text-lg h-full min-w-2xs flex flex-col justify-baseline items-start p-4 bg-gray-800 overflow-scroll'>
@@ -168,7 +170,7 @@ function ProfileMenu() {
                 {/* Log Out Button */}
                 <div className="flex justify-center mt-4">
                     <button
-                        onClick={handleLogout}
+                        onClick={() => handleLogout()}
                         className="flex items-center justify-between py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 active:bg-red-400 transition-all w-full max-w-xs"
                     >
                         <span className="flex items-center gap-2"><LogOut size={iconSize} />Exit</span>
