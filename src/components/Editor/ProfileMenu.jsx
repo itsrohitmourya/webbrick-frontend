@@ -49,7 +49,7 @@ function ProfileMenu() {
                         dispatch(toggleAutoSaveToolTip());
                         timeoutRef.current = null;
                     }, 4000);
-                }, 30000);
+                }, 5000);
             } else {
                 if (autoSaveToolTip) {
                     dispatch(toggleAutoSaveToolTip());
