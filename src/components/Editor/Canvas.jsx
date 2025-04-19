@@ -171,8 +171,6 @@ function Canvas() {
       newDevScript.textContent = `${existingDevJS}\n${devJs}`;
       body.appendChild(newDevScript);
     }
-
-    console.log("iframe updated");
   };
 
   return (

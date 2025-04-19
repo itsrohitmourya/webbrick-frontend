@@ -7,7 +7,7 @@ const initialState = {
       type: "nav",
       name: "Nav Bar",
       code: {
-        html: `<nav id="a1b2c3" class="d4e5f6" role="navigation">
+        html: `<nav id="a1b2c3" class="d4e5f6 draggable" draggable="true" role="navigation">
     <a href="#" id="g7h8i9" class="j0k1l2">Brand</a>
     <button id="m3n4o5" class="p6q7r8" aria-label="Toggle navigation">
         <span id="line1" class="line"></span>
@@ -142,8 +142,8 @@ const initialState = {
       preview: "/nav2.png",
       type: "nav",
       name: "Nav Bar",
-      code: {
-        html: `  <nav class="wbNav12x-container" role="navigation" aria-label="Main navigation">
+      code: { 
+        html: `  <nav class="wbNav12x-container draggable" draggable="true" role="navigation" aria-label="Main navigation">
     <div class="wbNav12x-brand">WebBrand</div>
     <div class="wbNav12x-hamburger" id="wbNav12x-toggle" aria-label="Toggle menu">
       <span></span>
@@ -270,7 +270,7 @@ const initialState = {
       type: "hero",
       name: "Hero Section",
       code: {
-        html: `<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga">
+        html: `<section id="hero-banner-wb-32ga" class="hero-banner-wb-32ga draggable" draggable="true" role="banner">
   <div class="hero-container-wb-2x9a">
     <div class="hero-imagewrap-wb-52jc">
       <img
@@ -381,7 +381,7 @@ const initialState = {
       name: "footer",
       code: {
         html: `
-            <footer class="wb-ftr2025-footer" role="contentinfo">
+            <footer class="wb-ftr2025-footer draggable" draggable="true" role="contentinfo">
               <div class="wb-ftr2025-container">
                 <p class="wb-ftr2025-text">
                   &copy; <span id="wb-ftr2025-year">2025</span> WebBrick. All rights reserved.
@@ -447,7 +447,7 @@ const initialState = {
       type: "CTA",
       name: "CTA",
       code: {
-        html: `<section class="wb-hero2025">
+        html: `<section class="wb-hero2025 draggable" draggable="true">
     <div class="wb-hero2025-container">
       <h1 class="wb-hero2025-title">Build Websites. Effortlessly.</h1>
       <p class="wb-hero2025-subtitle">With WebBrick, design and launch beautiful pages in minutes.</p>
@@ -491,7 +491,7 @@ const initialState = {
       type: 'team-card',
       name: 'Team Card',
       code: {
-        html:`<div id="wrapper452"><section class="wb-team2025">
+        html:`<div id="wrapper452"><section class="wb-team2025 draggable" draggable="true">
     <h2 class="wb-team2025-title">Meet Our Team</h2>
     <div class="wb-team2025-grid">
       <div class="wb-team2025-card">
@@ -638,7 +638,7 @@ const initialState = {
       type: 'feature-card',
       name: 'Feature Card',
       code : {
-        html : ` <section class="wb-features2025">
+        html : ` <section class="wb-features2025 draggable" draggable="true">
     <h2 class="wb-features2025-title">Why Choose Us?</h2>
     <div class="wb-features2025-grid">
       <div class="wb-features2025-item">
@@ -692,7 +692,7 @@ js :``,
       type: 'plan-card',
       name: 'Plan Card',
       code: {
-        html : `<section class="wb-pricing2025">
+        html : `<section class="wb-pricing2025 draggable" draggable="true">
     <h2>Choose Your Plan</h2>
     <div class="wb-pricing2025-grid">
       <div class="wb-pricing2025-card">
@@ -816,7 +816,7 @@ js :``,
       type: 'newsletter',   
       name : 'Newsletter',
       code : {
-        html : `<div class="wrapper259">  <section class="wb-newsletter2025">
+        html : `<div class="wrapper259">  <section class="wb-newsletter2025 draggable" draggable="true">
     <h2>Stay Updated</h2>
     <p>Subscribe to receive the latest news and updates directly in your inbox.</p>
     <form class="wb-newsletter2025-form">
@@ -902,6 +902,235 @@ js :``,
     }`,
     js: ``,
 
+      }
+    },
+    {
+      preview: '/nav3.png',
+      type: 'nav',
+      name: 'Nav Bar',
+      code: {
+       html: `<nav id="navBar_123" class="draggable" draggable="true" aria-label="Main Navigation">
+    <div class="navContainer_456">
+      <div class="logo_789" aria-label="Website Logo">MyLogo</div>
+      <div class="hamburgerMenu_101" aria-label="Toggle Navigation" tabindex="0" role="button" aria-expanded="false">
+        <div class="line_112"></div>
+        <div class="line_113"></div>
+        <div class="line_114"></div>
+      </div>
+      <ul class="navList_115" aria-hidden="true">
+        <li class="navItem_116"><a href="#home" class="navLink_117">Home</a></li>
+        <li class="navItem_118"><a href="#about" class="navLink_119">About</a></li>
+        <li class="navItem_120"><a href="#services" class="navLink_121">Services</a></li>
+        <li class="navItem_122"><a href="#contact" class="navLink_123">Contact</a></li>
+      </ul>
+    </div>
+  </nav>`,
+  css: `#navBar_123 {
+      background-color: #333;
+      color: #fff;
+      position: relative;
+    }
+
+    .navContainer_456 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    .logo_789 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .hamburgerMenu_101 {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .hamburgerMenu_101.animate {
+      transform: rotate(180deg) scale(1.1);
+      animation: bounce 0.4s ease;
+    }
+
+    @keyframes bounce {
+      0% { transform: rotate(180deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(180deg) scale(1.1); }
+    }
+
+    .line_112, .line_113, .line_114 {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    .navList_115 {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navItem_116, .navItem_118, .navItem_120, .navItem_122 {
+      margin: 0 15px;
+    }
+
+    .navLink_117, .navLink_119, .navLink_121, .navLink_123 {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .navLink_117:hover, .navLink_119:hover, .navLink_121:hover, .navLink_123:hover {
+      color: #f0a500;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .navList_115 {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        gap: 2rem;
+        padding: 20px 0px;
+        background-color: #333;
+      }
+
+      .navList_115 li {
+        width: max-content;
+        text-align: center;
+      }
+      .navList_115.active {
+        display: flex;
+      }
+
+      .hamburgerMenu_101 {
+        display: flex;
+      }
+    }`,
+    js : `document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerMenu = document.querySelector('.hamburgerMenu_101');
+      const navList = document.querySelector('.navList_115');
+
+      hamburgerMenu.addEventListener('click', function() {
+        const isActive = navList.classList.toggle('active');
+        hamburgerMenu.setAttribute('aria-expanded', isActive);
+        navList.setAttribute('aria-hidden', !isActive);
+
+        // Animate the hamburger icon
+        hamburgerMenu.classList.add('animate');
+        setTimeout(() => {
+          hamburgerMenu.classList.remove('animate');
+        }, 500);
+      });
+
+      const navLinks = document.querySelectorAll('.navLink_117, .navLink_119, .navLink_121, .navLink_123');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navList.classList.remove('active');
+          hamburgerMenu.setAttribute('aria-expanded', false);
+          navList.setAttribute('aria-hidden', true);
+        });
+      });
+    });`
+      }
+    },
+    {
+      preview : '/hero2.png',
+      type : 'hero',
+      name : 'Hero Section',
+      code : {
+        html : ` <section id="heroSection_a12x" class="draggable" draggable="true">
+    <div class="heroImage_w9z">
+      <img src="/icon2.png" alt="Hero Image" />
+    </div>
+    <div class="heroText_q84">
+      <h1 class="heroTitle_jd7">Welcome to Web Brick</h1>
+      <p class="heroDesc_r2y">
+        Build beautiful websites with zero code. Add sections, edit content, and launch in minutes. Your creative freedom starts here.
+      </p>
+    </div>
+  </section>`,
+  css : `* {
+      box-sizing: border-box;
+    }
+
+   
+
+    #heroSection_a12x {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem 10rem;
+      padding: 4rem 2rem;
+      background-color: #f5f5f5;
+    }
+
+    .heroImage_w9z {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heroImage_w9z img {
+      height: 300px;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .heroText_q84 {
+      flex: 1;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .heroTitle_jd7 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      margin: 0;
+    }
+
+    .heroDesc_r2y {
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: #555;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      #heroSection_a12x {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 1rem;
+      }
+
+      .heroImage_w9z img {
+        height: 200px;
+      }
+
+      .heroText_q84 {
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+      }
+    }`,
+  js :``
       }
     }
   ],

@@ -4,18 +4,18 @@ import { useDispatch } from 'react-redux';
 import { laptopScreenSize, tabletScreenSize, phoneScreenSize } from '../../app/slices/screenSizeSlice';
 
 function ResponsiveView() {
-    const [canvasSize, setCanvasSize] = useState("375px");
+    const [canvasSize, setCanvasSize] = useState("1440px");
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(canvasSize === "1024px" ? laptopScreenSize() : canvasSize === "768px" ? tabletScreenSize() : phoneScreenSize()
+        dispatch(canvasSize === "1440px" ? laptopScreenSize() : canvasSize === "768px" ? tabletScreenSize() : phoneScreenSize()
         );
     }, [canvasSize, dispatch]);
 
     const views = [
-        { title: "Desktop View 1024px", size: "1024px", icon: LucideMonitor },
-        { title: "Mobile View 375px", size: "375px", icon: LucideSmartphone },
+        { title: "Desktop View 1440px", size: "1440px", icon: LucideMonitor },
         { title: "Tablet View 768px", size: "768px", icon: LucideTablet },
+        { title: "Mobile View 375px", size: "375px", icon: LucideSmartphone },
     ];
 
     const iconSize = 24;
