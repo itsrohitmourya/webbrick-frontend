@@ -73,7 +73,9 @@ export const fetchProjectById = createAsyncThunk(
     try {
       const { data } = await getProjectById(projectId);
       dispatch(setCurrentProject(data))
-      Navigate('/editor')
+      if(Navigate){
+        Navigate('/editor')
+      }
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch project by ID");
     }

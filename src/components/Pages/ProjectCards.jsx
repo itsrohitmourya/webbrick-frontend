@@ -190,9 +190,11 @@ const ProjectCards = () => {
                         </button>
 
                         <button
-                          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center transition active:scale-75 w-full sm:w-auto"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center transition active:scale-75 w-full sm:w-auto"
+                          onClick={() => handleProjectOpen(project._id)}
                         >
-                          <ExportProjectButton/>
+                          <FolderOpen size={18} />
+                          Open
                         </button>
                       </div>
                     </div>
