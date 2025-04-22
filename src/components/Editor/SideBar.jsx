@@ -39,39 +39,6 @@ function SideBar() {
         dispatch(resume())
     }
 
-
-
-    const handleManualSave = () => {
-        dispatch(toggleManualSave());
-        dispatch(toggleAutoSaveToolTip())
-
-        setTimeout(() => {
-            const currentManualSave = store.getState().autoSave.manualSave;
-            const currentToolTip = store.getState().autoSave.autoSaveToolTip;
-            if (currentManualSave && currentToolTip) {
-                dispatch(toggleManualSave()); // Toggle back to false
-                dispatch(toggleAutoSaveToolTip())
-            }
-            console.log("Manual Save is done")
-        }, 4000);
-    };
-
-    useEffect(() => {
-            const handleKeyDown = (e) => {
-              if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-                e.preventDefault(); // Prevent browser default Save Page
-                handleManualSave();
-              }
-            };
-          
-            window.addEventListener('keydown', handleKeyDown);
-          
-            return () => {
-              window.removeEventListener('keydown', handleKeyDown); // Cleanup
-            };
-          }, []);
-          
-
     return (
         <div className='h-[calc(100vh- 4.5rem)] min-w-max flex justify-baseline items-start overflow-hidden border'>
             <div className='min-h-full w-16 flex flex-col justify-between items-center relative bg-slate-900'>
@@ -109,14 +76,7 @@ function SideBar() {
                             <Maximize color="white" size={iconSize} />
                         </button>
                     </abbr>
-                    <abbr title="Save project">
-                        <button
-                            className="h-6 w-6 flex justify-center items-center cursor-pointer active:scale-70 text-white"
-                            onClick={handleManualSave}
-                        >
-                            <Save size={iconSize} />
-                        </button>
-                    </abbr>
+                   
 
                 </div>
                 <div className='h-auto w-full flex flex-col absolute bottom-0 justify-baseline items-center gap-6 pb-4'>
