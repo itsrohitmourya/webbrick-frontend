@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { laptopScreenSize, tabletScreenSize, phoneScreenSize } from '../../app/slices/screenSizeSlice';
 
 function ResponsiveView() {
-    const [canvasSize, setCanvasSize] = useState("1440px");
+    const [canvasSize, setCanvasSize] = useState("375px");
     const dispatch = useDispatch();
 
     useEffect(() => {

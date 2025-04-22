@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    screenSize : "1440px"
+    screenSize : "375px"
 }
 
 const screenSizeSlice = createSlice({
