@@ -2,258 +2,138 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Context Menu with Href Edit</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      color: white;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Image Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #121212;
-    }
+        #imgW588 {
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0rem;
+        }
 
-    .draggable {
-      cursor: grab;
-      transition: transform 0.2s ease;
-    }
+        #imgWrap991 {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
 
-    .dragging {
-      opacity: 0.5;
-      transform: scale(1.05);
-    }
+        .sliderBx20 {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
 
-    .editing {
-      outline: 2px solid #007BFF;
-    }
+        .slideImgA1 {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
 
-    .context-menu {
-      position: absolute;
-      background: #333;
-      color: white;
-      border-radius: 5px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      z-index: 999;
-      width: 260px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+        .btnXprev,
+        .btnXnext {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
 
-    .context-menu label {
-      margin-left: 5px;
-      color: #ccc;
-      font-size: 14px;
-    }
+        .btnXprev:hover,
+        .btnXnext:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
 
-    .context-menu input {
-      width: 100%;
-      padding: 8px;
-      border-radius: 4px;
-      color: white;
-      background: rgba(132, 132, 132, 0.631);
-      outline: none;
-      border: none;
-      transition: box-shadow 0.2s ease;
-    }
+        .btnXprev {
+            left: 10px;
+        }
 
-    .context-menu input:focus {
-      box-shadow: 0 0 0 2px #3B82F6;
-    }
+        .btnXnext {
+            right: 10px;
+        }
 
-    .context-menu button {
-      background: none;
-      border: none;
-      color: white;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      text-align: left;
-    }
+        @media (max-width: 480px) {
 
-    .context-menu button:hover {
-      background: #555;
-    }
-
-    .context-menu button.remove {
-      color: red;
-    }
-  </style>
+            .btnXprev,
+            .btnXnext {
+                width: 32px;
+                height: 32px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="draggable" draggable="true">
-        <a href="">test</a>
-        <a href="">test</a>
-        <a href="">test</a>
-        <a href="">test</a>
+    <div id="imgW588" class="draggable" draggable="true">
+        <div id="imgWrap991">
+            <div class="sliderBx20" id="sliderBx20">
+                <img src="/Client/public/img1.jpg" class="slideImgA1" />
+                <img src="/Client/public/img2.jpg" class="slideImgA1" />
+                <img src="/Client/public/img3.jpg" class="slideImgA1" />
+                <img src="/Client/public/img5.jpg" class="slideImgA1" />
+                <img src="/Client/public/img4.jpg" class="slideImgA1" />
+                <img src="/Client/public/img5.jpg" class="slideImgA1" />
+            </div>
+            <button class="btnXprev" id="btnXprev">&#10094;</button>
+            <button class="btnXnext" id="btnXnext">&#10095;</button>
+        </div>
     </div>
 
-    <div class="draggable" draggable="true">
-        <a href="https://example.com" class="link">Example Link</a>
-      </div>
-    
-      <div class="draggable" draggable="true">
-        <p>This has no link</p>
-      </div>
-    
-      <div class="draggable" draggable="true">
-        <a href="" class="link">Empty Link</a>
-      </div>
-    
-      <div class="draggable" draggable="true">
-        <img src="image.jpg" alt="Sample Image" />
-      </div>
-    
-      <div class="draggable" draggable="true">
-        <video controls>
-          <source src="video.mp4" type="video/mp4" />
-        </video>
-      </div>
-    
-      <div class="draggable" draggable="true">
-        <iframe src="https://www.example.com" width="300" height="200"></iframe>
-      </div>
-  <script id="devScript">
-const container = document.body;
-let draggedElement = null;
-let selectedElement = null;
-let currentMenu = null;
-let hrefTarget = null;
-let urlInput = null;
-let mediaTarget = null;
-let mediaSrcInput = null;
+    <script>
+        const sliderBox = document.getElementById("sliderBx20");
+        const prevBtn = document.getElementById("btnXprev");
+        const nextBtn = document.getElementById("btnXnext");
 
-container.addEventListener("dragstart", (e) => {
-  if (e.target.classList.contains("draggable")) {
-    draggedElement = e.target;
-    draggedElement.classList.add("dragging");
-  }
-});
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".slideImgA1");
+        const totalSlides = slides.length;
 
-container.addEventListener("dragend", () => {
-  if (draggedElement) {
-    draggedElement.classList.remove("dragging");
-    draggedElement = null;
-  }
-});
+        function updateSlide(index) {
+            sliderBox.style.transform = `translateX(-${index * 100}%)`;
+        }
 
-container.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
-  closeContextMenu();
+        function showNext() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlide(currentIndex);
+        }
 
-  selectedElement = e.target;
-  createContextMenu(e.pageX, e.pageY, selectedElement);
-});
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlide(currentIndex);
+        }
 
-function createContextMenu(x, y, clickedElement) {
-  currentMenu = document.createElement("div");
-  currentMenu.className = "context-menu";
-  currentMenu.style.left = x + "px";
-  currentMenu.style.top = y + "px";
+        nextBtn.addEventListener("click", showNext);
+        prevBtn.addEventListener("click", showPrev);
 
-  hrefTarget = null;
-  urlInput = null;
-  mediaTarget = null;
-  mediaSrcInput = null;
+        setInterval(showNext, 4000);
+    </script>
 
-  // Check if clicked element is <a> or inside one
-  if (clickedElement.tagName === "A") {
-    hrefTarget = clickedElement;
-  } else {
-    hrefTarget = clickedElement.closest("a");
-  }
-
-  if (hrefTarget) {
-    const label = document.createElement("label");
-    label.textContent = "Edit Link:";
-    urlInput = document.createElement("input");
-    urlInput.value = hrefTarget.getAttribute("href") || "";
-    currentMenu.appendChild(label);
-    currentMenu.appendChild(urlInput);
-  }
-
-  // Check if clicked element is media
-  if (["IMG", "VIDEO", "IFRAME"].includes(clickedElement.tagName)) {
-    mediaTarget = clickedElement;
-  } else {
-    const mediaParent = clickedElement.closest("img, video, iframe");
-    if (mediaParent) mediaTarget = mediaParent;
-  }
-
-  if (mediaTarget) {
-    const mediaLabel = document.createElement("label");
-    mediaLabel.textContent = "Edit Media Source:";
-    mediaSrcInput = document.createElement("input");
-    mediaSrcInput.value = mediaTarget.getAttribute("src") || "";
-    currentMenu.appendChild(mediaLabel);
-    currentMenu.appendChild(mediaSrcInput);
-  }
-
-  const editBtn = document.createElement("button");
-  editBtn.textContent = "Edit Text";
-  editBtn.onclick = () => {
-    selectedElement.setAttribute("contenteditable", "true");
-    selectedElement.classList.add("editing");
-    selectedElement.focus();
-  };
-
-  const saveBtn = document.createElement("button");
-  saveBtn.textContent = "Save";
-  saveBtn.onclick = () => {
-    if (selectedElement) {
-      selectedElement.removeAttribute("contenteditable");
-      selectedElement.classList.remove("editing");
-    }
-
-    if (hrefTarget && urlInput) {
-      hrefTarget.setAttribute("href", urlInput.value);
-    }
-
-    if (mediaTarget && mediaSrcInput) {
-      mediaTarget.setAttribute("src", mediaSrcInput.value);
-    }
-
-    closeContextMenu();
-  };
-
-  const removeBtn = document.createElement("button");
-  removeBtn.textContent = "Remove";
-  removeBtn.className = "remove";
-  removeBtn.onclick = () => {
-    selectedElement.remove();
-    closeContextMenu();
-  };
-
-  currentMenu.appendChild(editBtn);
-  currentMenu.appendChild(saveBtn);
-  currentMenu.appendChild(removeBtn);
-  document.body.appendChild(currentMenu);
-}
-
-function closeContextMenu() {
-  if (currentMenu) {
-    currentMenu.remove();
-    currentMenu = null;
-    hrefTarget = null;
-    urlInput = null;
-    mediaTarget = null;
-    mediaSrcInput = null;
-  }
-}
-
-window.addEventListener("click", (e) => {
-  if (!e.target.closest(".context-menu")) {
-    closeContextMenu();
-  }
-});
-
-  </script>
 </body>
 
 </html>

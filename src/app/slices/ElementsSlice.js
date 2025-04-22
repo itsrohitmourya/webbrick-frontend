@@ -1132,6 +1132,290 @@ js :``,
     }`,
   js :``
       }
+    },
+    {
+      preview : '/ytVideo.png',
+      type : 'video',
+      name : 'Youtube Video',
+      code : {
+        html : `<div id="con446" class="draggable" draggable="true">
+        <iframe id="vidWrap45" src="https://www.youtube.com/embed/WO2b03Zdu4Q?si=dOJK5DcwyJ0hyrwL"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+        <div class="textWrap32">
+            <h1 class="hdTxt94">Welcome to the WebBrick</h1>
+            <span class="desc88">This is a sample description text. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab neque at dolores repellat sequi eum ipsa dolore, libero labore. Omnis odit incidunt voluptatum quidem placeat voluptas debitis necessitatibus veniam blanditiis quod temporibus eveniet sed adipisci, aspernatur delectus soluta repudiandae esse consequuntur at dolorum excepturi? Suscipit?</span>
+        </div>
+    </div>`,
+    css : `* {
+            margin: 0;
+            padding: 0;
+        }
+
+        #con446 {
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: max-content;
+            padding: 20px 10px;
+            gap: 1rem;
+        }
+
+        #vidWrap45 {
+            border: 8px solid #c4c4c4;
+            border-radius: 20px;
+            height: auto;
+            width: 90%;
+            max-width: 560px;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .textWrap32 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: flex-start;
+        }
+
+        .hdTxt94 {
+            font-size: 2rem;
+            color: #444;
+        }
+
+        .desc88 {
+            max-width: 300px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        @media screen and (max-width: 768px) {
+            .textWrap32 {
+                text-align: center;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .textWrap32 {
+                padding: 0.5rem 0 0 0;
+                align-items: flex-start;
+            }
+
+            #con446 {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }`
+      }
+    },
+    {
+      preview : '/imgBox.png',
+      type : 'image-box',
+      name : 'Image Box',
+      code : {
+        html : ` <div id="b45xCon" class="draggable" draggable="true">
+        <img id="imgXv902" src="/Client/public/icon2.png" alt="">
+        <div class="txtGrp19">
+            <h1 class="titleHd55">Welcome to the WebBrick</h1>
+            <span class="descText77">This is a sample description text. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab neque at dolores repellat sequi eum ipsa dolore, libero labore. Omnis odit incidunt voluptatum quidem placeat voluptas debitis necessitatibus veniam blanditiis quod temporibus eveniet sed adipisci, aspernatur delectus soluta repudiandae esse consequuntur at dolorum excepturi? Suscipit?</span>
+        </div>
+    </div>`,
+    css : `    * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #b45xCon {
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: max-content;
+            padding: 20px 10px;
+            gap: 1rem 2rem;
+        }
+
+        #imgXv902 {
+            height: auto;
+            width: clamp(180px, 50vw, 300px);
+            overflow: hidden;
+        }
+
+        .txtGrp19 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: flex-start;
+        }
+
+        .titleHd55 {
+            font-size: 2rem;
+            color: #444;
+        }
+
+        .descText77 {
+            max-width: 300px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        @media screen and (max-width: 768px) {
+            .txtGrp19 {
+                text-align: center;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .txtGrp19 {
+                padding: 0.5rem 0 0 0;
+                align-items: flex-start;
+            }
+
+            #b45xCon {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }`
+      } 
+    },
+    {
+      preview : '/imgSlide.png',
+      type : 'image-slider',
+      name : 'Image Slider',
+      code : {
+        html : `<div id="imgW588" class="draggable" draggable="true">
+        <div id="imgWrap991">
+            <div class="sliderBx20" id="sliderBx20">
+                <img src="/img1.jpg" class="slideImgA1" />
+                <img src="/img2.jpg" class="slideImgA1" />
+                <img src="/img3.jpg" class="slideImgA1" />
+                <img src="/img4.jpg" class="slideImgA1" />
+                <img src="/img5.jpg" class="slideImgA1" />
+                <img src="/img3.jpg" class="slideImgA1" />
+            </div>
+            <button class="btnXprev" id="btnXprev">&#10094;</button>
+            <button class="btnXnext" id="btnXnext">&#10095;</button>
+        </div>
+    </div>
+`,
+css : ` * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #imgW588 {
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0rem;
+        }
+
+        #imgWrap991 {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        .sliderBx20 {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slideImgA1 {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .btnXprev,
+        .btnXnext {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btnXprev:hover,
+        .btnXnext:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .btnXprev {
+            left: 10px;
+        }
+
+        .btnXnext {
+            right: 10px;
+        }
+
+        @media (max-width: 480px) {
+
+            .btnXprev,
+            .btnXnext {
+                width: 32px;
+                height: 32px;
+                font-size: 1.2rem;
+            }
+        }`,
+        js : "const sliderBox = document.getElementById('sliderBx20');\n\
+const prevBtn = document.getElementById('btnXprev');\n\
+const nextBtn = document.getElementById('btnXnext');\n\
+\n\
+let currentIndex = 0;\n\
+const slides = document.querySelectorAll('.slideImgA1');\n\
+const totalSlides = slides.length;\n\
+\n\
+function updateSlide(index) {\n\
+    sliderBox.style.transform = `translateX(-${index * 100}%)`;\n\
+}\n\
+\n\
+function showNext() {\n\
+    currentIndex = (currentIndex + 1) % totalSlides;\n\
+    updateSlide(currentIndex);\n\
+}\n\
+\n\
+function showPrev() {\n\
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;\n\
+    updateSlide(currentIndex);\n\
+}\n\
+\n\
+nextBtn.addEventListener('click', showNext);\n\
+prevBtn.addEventListener('click', showPrev);\n\
+\n\
+setInterval(showNext, 4000);"
+      }
     }
   ],
   Toast: false,
