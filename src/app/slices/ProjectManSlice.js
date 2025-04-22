@@ -386,7 +386,6 @@ const ProjectManSlice = createSlice({
       if (curProjectOBJ && curProjectOBJ.pages[state.curWorkPage]) {
         curProjectOBJ.pages[state.curWorkPage].pageCode = code;
       }
-      console.log("Updated page code:", code);
     },
     toggleisCodePreview: (state) => {
       state.isCodePreview = !state.isCodePreview;

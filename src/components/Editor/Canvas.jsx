@@ -54,10 +54,8 @@ function Canvas() {
 
   useEffect(() => {
     if (autoSave) {
-      const intervalId = setInterval(() => {
         updateLivePageCode();
-      }, 30000);
-      return () => clearInterval(intervalId);
+        console.log("Auto-saving page code...");
     }
     if (manualSave) {
       updateLivePageCode()

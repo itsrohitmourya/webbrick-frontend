@@ -104,8 +104,7 @@ function ProfileMenu() {
             );
         }
     }, [autoSave, manualSave]);
-
-
+  
     const handleLogout = () => {
         dispatch(resume()) 
     }
@@ -128,13 +127,13 @@ function ProfileMenu() {
             </div>
             <div className="flex flex-col w-full max-w-md mt-4 h-auto bg-gray-700 p-4 gap-4 rounded-lg shadow-lg text-white">
                 {/* Autosave Toggle */}
-                <button
+                {/* <button
                     className="flex items-center justify-between py-2 px-4 bg-gray-600 rounded-md hover:bg-gray-500 active:bg-gray-400 transition-all"
                     onClick={() => handleAutoSave()}
                 >
                     <span className="flex items-center gap-2"><FolderSync size={iconSize} /> Autosave </span>
                     {autoSaveFiles ? <ToggleRight size={30} /> : <ToggleLeft size={30} />}
-                </button>
+                </button> */}
 
                 <button
                     className="flex items-center justify-between py-2 px-4 bg-gray-600 rounded-md hover:bg-gray-500 active:bg-gray-400 transition-all"
