@@ -2,11 +2,9 @@ import JSZip from "jszip";          // ✅ For zip file creation
 import { saveAs } from "file-saver"; // ✅ For downloading the zip
 import { useSelector } from "react-redux";
 import { Download } from "lucide-react";
-import { useEffect } from "react";
-
 const iconSize = 18;
 
-const ExportProjectButton = () => {
+const ExportProjectButton = ({style}) => {
     const projects = useSelector((state) => state.projectMan.projects);
 
     const cleanHTML = (html) => {
@@ -92,7 +90,7 @@ You can create, manage, and export fully functional websites with a drag-and-dro
 
     return (
         <button
-            className="flex items-center justify-between py-2 px-4 bg-gray-600 rounded-md hover:bg-gray-500 active:bg-gray-400 transition-all"
+            className={style}
             onClick={exportProjectAsZip}
         >
             <span className="flex items-center gap-2">

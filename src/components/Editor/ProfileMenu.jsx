@@ -143,7 +143,7 @@ function ProfileMenu() {
                     <span className="flex items-center gap-2"><Save size={iconSize} /> Save</span>
                 </button>
 
-                <ExportProjectButton />
+                <ExportProjectButton style={"flex items-center justify-between py-2 px-4 bg-gray-600 rounded-md hover:bg-gray-500 active:bg-gray-400 transition-all"} />
 
                 <a href="/dashboard"
                     target="_blank"

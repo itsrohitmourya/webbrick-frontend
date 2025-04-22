@@ -15,6 +15,7 @@ import {
 } from "../../app/slices/ProjectManSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ExportProjectButton from "../Editor/ExportProjectButton";
 
 const ProjectCards = () => {
   const dispatch = useDispatch();
@@ -191,8 +192,7 @@ const ProjectCards = () => {
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center transition active:scale-75 w-full sm:w-auto"
                         >
-                          <Download size={18} />
-                          Export
+                          <ExportProjectButton/>
                         </button>
                       </div>
                     </div>
