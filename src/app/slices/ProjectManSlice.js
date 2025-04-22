@@ -105,7 +105,6 @@ const initialState = {
   createPagePopUP: false,
   boilerPlateCode:`<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -196,145 +195,165 @@ const initialState = {
     }
   </style>
 </head>
-
 <body>
+  
+
   <script id='devScript'>
-        const container = document.body;
-let draggedElement = null;
-let selectedElement = null;
-let currentMenu = null;
-let hrefTarget = null;
-let urlInput = null;
-let mediaTarget = null;
-let mediaSrcInput = null;
+    const container = document.querySelector("body");
+    let draggedElement = null;
+    let selectedElement = null;
+    let currentMenu = null;
+    let hrefTarget = null;
+    let urlInput = null;
+    let mediaTarget = null;
+    let mediaSrcInput = null;
 
-container.addEventListener("dragstart", (e) => {
-  if (e.target.classList.contains("draggable")) {
-    draggedElement = e.target;
-    draggedElement.classList.add("dragging");
-  }
-});
+    container.addEventListener("dragstart", (e) => {
+      if (e.target.classList.contains("draggable")) {
+        draggedElement = e.target;
+        draggedElement.classList.add("dragging");
+      }
+    });
 
-container.addEventListener("dragend", () => {
-  if (draggedElement) {
-    draggedElement.classList.remove("dragging");
-    draggedElement = null;
-  }
-});
+    container.addEventListener("dragend", () => {
+      if (draggedElement) {
+        draggedElement.classList.remove("dragging");
+        draggedElement = null;
+      }
+    });
 
-container.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
-  closeContextMenu();
+    // Allow for dragover to determine where the item should go
+    container.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      const targetElement = e.target;
 
-  selectedElement = e.target;
-  createContextMenu(e.pageX, e.pageY, selectedElement);
-});
+      // Check if the target is a draggable element or inside a draggable div
+      if (targetElement.classList.contains("draggable") && targetElement !== draggedElement) {
+        const rect = targetElement.getBoundingClientRect();
+        const offset = e.clientY - rect.top;
 
-function createContextMenu(x, y, clickedElement) {
-  currentMenu = document.createElement("div");
-  currentMenu.className = "context-menu";
-  currentMenu.style.left = x + "px";
-  currentMenu.style.top = y + "px";
+        // Insert the dragged element either above or below the target element based on mouse position
+        if (offset < rect.height / 2) {
+          targetElement.parentNode.insertBefore(draggedElement, targetElement);
+        } else {
+          targetElement.parentNode.insertBefore(draggedElement, targetElement.nextSibling);
+        }
+      }
+    });
 
-  hrefTarget = null;
-  urlInput = null;
-  mediaTarget = null;
-  mediaSrcInput = null;
+    container.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      closeContextMenu();
 
-  // Check if clicked element is <a> or inside one
-  if (clickedElement.tagName === "A") {
-    hrefTarget = clickedElement;
-  } else {
-    hrefTarget = clickedElement.closest("a");
-  }
+      selectedElement = e.target;
+      createContextMenu(e.pageX, e.pageY, selectedElement);
+    });
 
-  if (hrefTarget) {
-    const label = document.createElement("label");
-    label.textContent = "Edit Link:";
-    urlInput = document.createElement("input");
-    urlInput.value = hrefTarget.getAttribute("href") || "";
-    currentMenu.appendChild(label);
-    currentMenu.appendChild(urlInput);
-  }
+    function createContextMenu(x, y, clickedElement) {
+      currentMenu = document.createElement("div");
+      currentMenu.className = "context-menu";
+      currentMenu.style.left = x + "px";
+      currentMenu.style.top = y + "px";
 
-  // Check if clicked element is media
-  if (["IMG", "VIDEO", "IFRAME"].includes(clickedElement.tagName)) {
-    mediaTarget = clickedElement;
-  } else {
-    const mediaParent = clickedElement.closest("img, video, iframe");
-    if (mediaParent) mediaTarget = mediaParent;
-  }
+      hrefTarget = null;
+      urlInput = null;
+      mediaTarget = null;
+      mediaSrcInput = null;
 
-  if (mediaTarget) {
-    const mediaLabel = document.createElement("label");
-    mediaLabel.textContent = "Edit Media Source:";
-    mediaSrcInput = document.createElement("input");
-    mediaSrcInput.value = mediaTarget.getAttribute("src") || "";
-    currentMenu.appendChild(mediaLabel);
-    currentMenu.appendChild(mediaSrcInput);
-  }
+      // Check if clicked element is <a> or inside one
+      if (clickedElement.tagName === "A") {
+        hrefTarget = clickedElement;
+      } else {
+        hrefTarget = clickedElement.closest("a");
+      }
 
-  const editBtn = document.createElement("button");
-  editBtn.textContent = "Edit Text";
-  editBtn.onclick = () => {
-    selectedElement.setAttribute("contenteditable", "true");
-    selectedElement.classList.add("editing");
-    selectedElement.focus();
-  };
+      if (hrefTarget) {
+        const label = document.createElement("label");
+        label.textContent = "Edit Link:";
+        urlInput = document.createElement("input");
+        urlInput.value = hrefTarget.getAttribute("href") || "";
+        currentMenu.appendChild(label);
+        currentMenu.appendChild(urlInput);
+      }
 
-  const saveBtn = document.createElement("button");
-  saveBtn.textContent = "Save";
-  saveBtn.onclick = () => {
-    if (selectedElement) {
-      selectedElement.removeAttribute("contenteditable");
-      selectedElement.classList.remove("editing");
+      // Check if clicked element is media
+      if (["IMG", "VIDEO", "IFRAME"].includes(clickedElement.tagName)) {
+        mediaTarget = clickedElement;
+      } else {
+        const mediaParent = clickedElement.closest("img, video, iframe");
+        if (mediaParent) mediaTarget = mediaParent;
+      }
+
+      if (mediaTarget) {
+        const mediaLabel = document.createElement("label");
+        mediaLabel.textContent = "Edit Media Source:";
+        mediaSrcInput = document.createElement("input");
+        mediaSrcInput.value = mediaTarget.getAttribute("src") || "";
+        currentMenu.appendChild(mediaLabel);
+        currentMenu.appendChild(mediaSrcInput);
+      }
+
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit Text";
+      editBtn.onclick = () => {
+        selectedElement.setAttribute("contenteditable", "true");
+        selectedElement.classList.add("editing");
+        selectedElement.focus();
+      };
+
+      const saveBtn = document.createElement("button");
+      saveBtn.textContent = "Save";
+      saveBtn.onclick = () => {
+        if (selectedElement) {
+          selectedElement.removeAttribute("contenteditable");
+          selectedElement.classList.remove("editing");
+        }
+
+        if (hrefTarget && urlInput) {
+          hrefTarget.setAttribute("href", urlInput.value);
+        }
+
+        if (mediaTarget && mediaSrcInput) {
+          mediaTarget.setAttribute("src", mediaSrcInput.value);
+        }
+
+        closeContextMenu();
+      };
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.className = "remove";
+      removeBtn.onclick = () => {
+        selectedElement.remove();
+        closeContextMenu();
+      };
+
+      currentMenu.appendChild(editBtn);
+      currentMenu.appendChild(saveBtn);
+      currentMenu.appendChild(removeBtn);
+      document.body.appendChild(currentMenu);
     }
 
-    if (hrefTarget && urlInput) {
-      hrefTarget.setAttribute("href", urlInput.value);
+    function closeContextMenu() {
+      if (currentMenu) {
+        currentMenu.remove();
+        currentMenu = null;
+        hrefTarget = null;
+        urlInput = null;
+        mediaTarget = null;
+        mediaSrcInput = null;
+      }
     }
 
-    if (mediaTarget && mediaSrcInput) {
-      mediaTarget.setAttribute("src", mediaSrcInput.value);
-    }
-
-    closeContextMenu();
-  };
-
-  const removeBtn = document.createElement("button");
-  removeBtn.textContent = "Remove";
-  removeBtn.className = "remove";
-  removeBtn.onclick = () => {
-    selectedElement.remove();
-    closeContextMenu();
-  };
-
-  currentMenu.appendChild(editBtn);
-  currentMenu.appendChild(saveBtn);
-  currentMenu.appendChild(removeBtn);
-  document.body.appendChild(currentMenu);
-}
-
-function closeContextMenu() {
-  if (currentMenu) {
-    currentMenu.remove();
-    currentMenu = null;
-    hrefTarget = null;
-    urlInput = null;
-    mediaTarget = null;
-    mediaSrcInput = null;
-  }
-}
-
-window.addEventListener("click", (e) => {
-  if (!e.target.closest(".context-menu")) {
-    closeContextMenu();
-  }
-});
+    window.addEventListener("click", (e) => {
+      if (!e.target.closest(".context-menu")) {
+        closeContextMenu();
+      }
+    });
   </script>
 </body>
-
 </html>
+
 
 
 `,
