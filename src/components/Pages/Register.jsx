@@ -19,7 +19,7 @@ function Register() {
       alert('User registered successfully');
       navigate('/login');
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('Registration error:', error);
       alert('Registration failed. Please try again.');
     } finally {
       setLoading(false);
@@ -36,6 +36,7 @@ function Register() {
         {/* Form */}
         <form onSubmit={handleRegister} className="space-y-6">
           
+          {/* Username */}
           {/* Username */}
           <div>
             <label htmlFor="username" className="block text-sm text-gray-300 mb-2">Username</label>
